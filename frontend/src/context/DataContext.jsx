@@ -20,6 +20,7 @@ export const DataProvider = ({ children }) => {
     logo: '',
     phone: '9870990795',
     email: 'info@dryfruto.com',
+    careerEmail: 'careers@dryfruto.com',
     address: '123, Main Street, New Delhi, India',
     whatsappLink: 'https://wa.me/919870990795',
     facebookLink: '',
