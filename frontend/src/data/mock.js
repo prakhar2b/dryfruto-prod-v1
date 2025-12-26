@@ -119,9 +119,9 @@ export const products = [
     category: "nuts-dry-fruits",
     type: "Roasted Cashews",
     basePrice: 210,
-    image: "https://images.pexels.com/photos/4033325/pexels-photo-4033325.jpeg?auto=compress&cs=tinysrgb&w=500",
+    image: "https://images.pexels.com/photos/1013420/pexels-photo-1013420.jpeg?auto=compress&cs=tinysrgb&w=500",
     images: [
-      "https://images.pexels.com/photos/4033325/pexels-photo-4033325.jpeg?auto=compress&cs=tinysrgb&w=500"
+      "https://images.pexels.com/photos/1013420/pexels-photo-1013420.jpeg?auto=compress&cs=tinysrgb&w=500"
     ],
     sku: "DRF003",
     shortDescription: "Perfectly roasted cashews with a hint of Himalayan salt.",
