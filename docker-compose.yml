@@ -47,7 +47,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        REACT_APP_BACKEND_URL: ${DOMAIN_URL:-http://localhost}
+        REACT_APP_BACKEND_URL: http://srv1225994.hstgr.cloud
     container_name: dryfruto-frontend
     restart: unless-stopped
     ports:
