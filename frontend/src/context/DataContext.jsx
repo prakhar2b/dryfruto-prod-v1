@@ -26,7 +26,16 @@ export const DataProvider = ({ children }) => {
     facebookLink: '',
     instagramLink: '',
     twitterLink: '',
-    youtubeLink: ''
+    youtubeLink: '',
+    bulkOrderProductTypes: ['Dry Fruits', 'Nuts', 'Seeds', 'Berries', 'Gift Boxes', 'Mixed Products'],
+    bulkOrderBenefits: [
+      'Direct sourcing from farms ensures freshness',
+      'Minimum order quantity: 10 kg',
+      'Special rates for orders above 100 kg',
+      'Custom packaging with your branding',
+      'Regular supply contracts available',
+      'Quality testing certificates provided'
+    ]
   });
   const [loading, setLoading] = useState(true);
 
