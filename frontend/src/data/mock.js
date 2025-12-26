@@ -15,43 +15,43 @@ export const categories = [
     id: 1,
     name: "Nuts & Dry Fruits",
     slug: "nuts-dry-fruits",
-    image: "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=300&h=300&fit=crop",
-    icon: "https://images.unsplash.com/photo-1608797178974-15b35a64ede9?w=100&h=100&fit=crop"
+    image: "https://images.pexels.com/photos/1295572/pexels-photo-1295572.jpeg?auto=compress&cs=tinysrgb&w=300",
+    icon: "https://images.pexels.com/photos/1013420/pexels-photo-1013420.jpeg?auto=compress&cs=tinysrgb&w=100"
   },
   {
     id: 2,
     name: "Dates",
     slug: "dates",
-    image: "https://images.unsplash.com/photo-1593001874117-c99c800e3eb5?w=300&h=300&fit=crop",
-    icon: "https://images.unsplash.com/photo-1593001874117-c99c800e3eb5?w=100&h=100&fit=crop"
+    image: "https://images.pexels.com/photos/5945755/pexels-photo-5945755.jpeg?auto=compress&cs=tinysrgb&w=300",
+    icon: "https://images.pexels.com/photos/5945755/pexels-photo-5945755.jpeg?auto=compress&cs=tinysrgb&w=100"
   },
   {
     id: 3,
     name: "Mix Dry Fruits",
     slug: "mix-dry-fruits",
-    image: "https://images.unsplash.com/photo-1616684000067-36952fde56ec?w=300&h=300&fit=crop",
-    icon: "https://images.unsplash.com/photo-1616684000067-36952fde56ec?w=100&h=100&fit=crop"
+    image: "https://images.pexels.com/photos/4033324/pexels-photo-4033324.jpeg?auto=compress&cs=tinysrgb&w=300",
+    icon: "https://images.pexels.com/photos/4033324/pexels-photo-4033324.jpeg?auto=compress&cs=tinysrgb&w=100"
   },
   {
     id: 4,
     name: "Makhana",
     slug: "makhana",
-    image: "https://images.unsplash.com/photo-1630321518146-95b8bb820e75?w=300&h=300&fit=crop",
-    icon: "https://images.unsplash.com/photo-1630321518146-95b8bb820e75?w=100&h=100&fit=crop"
+    image: "https://images.pexels.com/photos/7446005/pexels-photo-7446005.jpeg?auto=compress&cs=tinysrgb&w=300",
+    icon: "https://images.pexels.com/photos/7446005/pexels-photo-7446005.jpeg?auto=compress&cs=tinysrgb&w=100"
   },
   {
     id: 5,
     name: "Seeds",
     slug: "seeds",
-    image: "https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=300&h=300&fit=crop",
-    icon: "https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=100&h=100&fit=crop"
+    image: "https://images.pexels.com/photos/4750274/pexels-photo-4750274.jpeg?auto=compress&cs=tinysrgb&w=300",
+    icon: "https://images.pexels.com/photos/4750274/pexels-photo-4750274.jpeg?auto=compress&cs=tinysrgb&w=100"
   },
   {
     id: 6,
     name: "Gift Boxes",
     slug: "gift-boxes",
-    image: "https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=300&h=300&fit=crop",
-    icon: "https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=100&h=100&fit=crop"
+    image: "https://images.pexels.com/photos/5945770/pexels-photo-5945770.jpeg?auto=compress&cs=tinysrgb&w=300",
+    icon: "https://images.pexels.com/photos/5945770/pexels-photo-5945770.jpeg?auto=compress&cs=tinysrgb&w=100"
   }
 ];
 
