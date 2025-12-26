@@ -106,7 +106,14 @@ const ProductPage = () => {
                 <h1 className="text-xl md:text-2xl font-bold mb-2">
                   {product.name}
                 </h1>
-                <p className="text-amber-200 text-sm mb-4">{product.shortDescription}</p>
+                <p className="text-amber-200 text-sm mb-2">{product.shortDescription}</p>
+                
+                {/* SKU */}
+                {product.sku && (
+                  <p className="text-amber-300/70 text-xs mb-4">
+                    SKU: <span className="text-amber-200">{product.sku}</span>
+                  </p>
+                )}
 
                 {/* Size Variants */}
                 <div className="mb-4">
