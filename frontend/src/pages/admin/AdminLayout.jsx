@@ -59,13 +59,15 @@ const AdminLayout = () => {
         </nav>
 
         <div className="p-4 border-t border-amber-900">
-          <Link
-            to="/"
+          <a
+            href="/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-3 px-4 py-3 rounded-lg text-amber-100 hover:bg-amber-900 transition-colors"
           >
             <Home className="w-5 h-5" />
-            {sidebarOpen && <span>View Website</span>}
-          </Link>
+            {sidebarOpen && <span>Visit Website</span>}
+          </a>
         </div>
       </aside>
 
