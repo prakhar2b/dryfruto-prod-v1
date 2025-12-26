@@ -667,6 +667,90 @@ async def delete_newsletter_subscription(sub_id: str):
     await db.newsletter.delete_one({"id": sub_id})
     return {"message": "Deleted"}
 
+# ============== THEME EXPORT ==============
+
+@api_router.get("/export-theme")
+async def export_theme():
+    """Export all site settings, content, and theme data as JSON"""
+    import json
+    from starlette.responses import Response
+    
+    # Get all collections data
+    settings = await db.site_settings.find_one({"id": "site_settings"}, {"_id": 0})
+    categories = await db.categories.find({}, {"_id": 0}).to_list(1000)
+    products = await db.products.find({}, {"_id": 0}).to_list(1000)
+    hero_slides = await db.hero_slides.find({}, {"_id": 0}).to_list(100)
+    testimonials = await db.testimonials.find({}, {"_id": 0}).to_list(100)
+    gift_boxes = await db.gift_boxes.find({}, {"_id": 0}).to_list(100)
+    
+    # Create export object
+    export_data = {
+        "exportVersion": "1.0",
+        "exportDate": datetime.now(timezone.utc).isoformat(),
+        "themeName": settings.get("businessName", "MyTheme") if settings else "MyTheme",
+        "siteSettings": settings or SiteSettings().model_dump(),
+        "categories": categories,
+        "products": products,
+        "heroSlides": hero_slides,
+        "testimonials": testimonials,
+        "giftBoxes": gift_boxes
+    }
+    
+    # Return as downloadable JSON
+    json_str = json.dumps(export_data, indent=2, default=str)
+    
+    return Response(
+        content=json_str,
+        media_type="application/json",
+        headers={
+            "Content-Disposition": f"attachment; filename={export_data['themeName']}_theme_export.json"
+        }
+    )
+
+@api_router.post("/import-theme")
+async def import_theme(import_data: dict):
+    """Import theme data from JSON"""
+    try:
+        # Import site settings
+        if "siteSettings" in import_data:
+            settings = import_data["siteSettings"]
+            settings["id"] = "site_settings"
+            await db.site_settings.replace_one(
+                {"id": "site_settings"},
+                settings,
+                upsert=True
+            )
+        
+        # Import categories
+        if "categories" in import_data and import_data["categories"]:
+            await db.categories.delete_many({})
+            await db.categories.insert_many(import_data["categories"])
+        
+        # Import products
+        if "products" in import_data and import_data["products"]:
+            await db.products.delete_many({})
+            await db.products.insert_many(import_data["products"])
+        
+        # Import hero slides
+        if "heroSlides" in import_data and import_data["heroSlides"]:
+            await db.hero_slides.delete_many({})
+            await db.hero_slides.insert_many(import_data["heroSlides"])
+        
+        # Import testimonials
+        if "testimonials" in import_data and import_data["testimonials"]:
+            await db.testimonials.delete_many({})
+            await db.testimonials.insert_many(import_data["testimonials"])
+        
+        # Import gift boxes
+        if "giftBoxes" in import_data and import_data["giftBoxes"]:
+            await db.gift_boxes.delete_many({})
+            await db.gift_boxes.insert_many(import_data["giftBoxes"])
+        
+        return {"message": "Theme imported successfully", "success": True}
+    except Exception as e:
+        logging.error(f"Import error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 # Include the router in the main app
 app.include_router(api_router)
 
