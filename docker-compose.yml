@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7.0
+    container_name: dryfruto-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: dryfruto_admin
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-DryFruto2025Secure}
+      MONGO_INITDB_DATABASE: dryfruto
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - dryfruto-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # FastAPI Backend
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: dryfruto-backend
+    restart: unless-stopped
+    environment:
+      MONGO_URL: mongodb://dryfruto_admin:${MONGO_PASSWORD:-DryFruto2025Secure}@mongodb:27017/dryfruto?authSource=admin
+      DB_NAME: dryfruto
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - dryfruto-network
+    healthcheck:
+      test: curl -f http://localhost:8001/api/ || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # React Frontend + Nginx Reverse Proxy
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_BACKEND_URL: ${DOMAIN_URL:-http://localhost}
+    container_name: dryfruto-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - dryfruto-network
+    volumes:
+      - ./nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
+
+volumes:
+  mongodb_data:
+    driver: local
+
+networks:
+  dryfruto-network:
+    driver: bridge
