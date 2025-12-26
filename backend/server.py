@@ -309,6 +309,8 @@ class SiteSettingsUpdate(BaseModel):
     aboutWhyChooseUs: Optional[List[dict]] = None
     # Theme Settings
     theme: Optional[dict] = None
+    # Page-specific CSS styles
+    pageStyles: Optional[dict] = None
 
 # Form Submission Models
 class BulkOrderSubmission(BaseModel):
