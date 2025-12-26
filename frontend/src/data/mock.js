@@ -72,10 +72,10 @@ export const products = [
     category: "nuts-dry-fruits",
     type: "Almonds",
     basePrice: 145,
-    image: "https://images.unsplash.com/photo-1608797178974-15b35a64ede9?w=500&h=500&fit=crop",
+    image: "https://images.pexels.com/photos/1013420/pexels-photo-1013420.jpeg?auto=compress&cs=tinysrgb&w=500",
     images: [
-      "https://images.unsplash.com/photo-1608797178974-15b35a64ede9?w=500&h=500&fit=crop",
-      "https://images.unsplash.com/photo-1574570068729-a7a65f04da7c?w=500&h=500&fit=crop"
+      "https://images.pexels.com/photos/1013420/pexels-photo-1013420.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "https://images.pexels.com/photos/86649/pexels-photo-86649.jpeg?auto=compress&cs=tinysrgb&w=500"
     ],
     sku: "DRF001",
     shortDescription: "Premium quality California almonds, rich in nutrients and perfect for daily consumption.",
@@ -96,10 +96,9 @@ export const products = [
     category: "nuts-dry-fruits",
     type: "Cashews",
     basePrice: 185,
-    image: "https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?w=500&h=500&fit=crop",
+    image: "https://images.pexels.com/photos/4033320/pexels-photo-4033320.jpeg?auto=compress&cs=tinysrgb&w=500",
     images: [
-      "https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?w=500&h=500&fit=crop",
-      "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=500&h=500&fit=crop"
+      "https://images.pexels.com/photos/4033320/pexels-photo-4033320.jpeg?auto=compress&cs=tinysrgb&w=500"
     ],
     sku: "DRF002",
     shortDescription: "Large, creamy jumbo cashews with a rich buttery taste.",
@@ -120,10 +119,9 @@ export const products = [
     category: "nuts-dry-fruits",
     type: "Roasted Cashews",
     basePrice: 210,
-    image: "https://images.unsplash.com/photo-1563292769-4e05b684851a?w=500&h=500&fit=crop",
+    image: "https://images.pexels.com/photos/4033325/pexels-photo-4033325.jpeg?auto=compress&cs=tinysrgb&w=500",
     images: [
-      "https://images.unsplash.com/photo-1563292769-4e05b684851a?w=500&h=500&fit=crop",
-      "https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?w=500&h=500&fit=crop"
+      "https://images.pexels.com/photos/4033325/pexels-photo-4033325.jpeg?auto=compress&cs=tinysrgb&w=500"
     ],
     sku: "DRF003",
     shortDescription: "Perfectly roasted cashews with a hint of Himalayan salt.",
