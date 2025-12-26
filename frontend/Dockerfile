@@ -2,15 +2,11 @@
 FROM node:18-alpine as build
 WORKDIR /app
 
-# Install yarn globally to ensure it's available
-RUN corepack enable && corepack prepare yarn@1.22.22 --activate
-
-# Copy package files
+# Copy package.json only
 COPY package.json ./
-COPY yarn.lock ./
 
-# Install dependencies (ignore engines for compatibility)
-RUN yarn install --frozen-lockfile --ignore-engines --network-timeout 100000
+# Install dependencies using npm (more compatible)
+RUN npm install --legacy-peer-deps
 
 # Copy source code
 COPY . .
@@ -20,7 +16,7 @@ ARG REACT_APP_BACKEND_URL
 ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
 
 # Build the app
-RUN yarn build
+RUN npm run build
 
 # Production stage
 FROM nginx:alpine
