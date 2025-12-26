@@ -15,43 +15,43 @@ export const categories = [
     id: 1,
     name: "Nuts & Dry Fruits",
     slug: "nuts-dry-fruits",
-    image: "https://images.pexels.com/photos/1295572/pexels-photo-1295572.jpeg?auto=compress&cs=tinysrgb&w=300",
+    image: "https://images.pexels.com/photos/1295572/pexels-photo-1295572.jpeg?auto=compress&cs=tinysrgb&w=600",
     icon: "https://images.pexels.com/photos/1013420/pexels-photo-1013420.jpeg?auto=compress&cs=tinysrgb&w=100"
   },
   {
     id: 2,
     name: "Dates",
     slug: "dates",
-    image: "https://images.pexels.com/photos/5945755/pexels-photo-5945755.jpeg?auto=compress&cs=tinysrgb&w=300",
+    image: "https://images.pexels.com/photos/5945755/pexels-photo-5945755.jpeg?auto=compress&cs=tinysrgb&w=600",
     icon: "https://images.pexels.com/photos/5945755/pexels-photo-5945755.jpeg?auto=compress&cs=tinysrgb&w=100"
   },
   {
     id: 3,
     name: "Mix Dry Fruits",
     slug: "mix-dry-fruits",
-    image: "https://images.pexels.com/photos/4033324/pexels-photo-4033324.jpeg?auto=compress&cs=tinysrgb&w=300",
-    icon: "https://images.pexels.com/photos/4033324/pexels-photo-4033324.jpeg?auto=compress&cs=tinysrgb&w=100"
+    image: "https://images.pexels.com/photos/86649/pexels-photo-86649.jpeg?auto=compress&cs=tinysrgb&w=600",
+    icon: "https://images.pexels.com/photos/86649/pexels-photo-86649.jpeg?auto=compress&cs=tinysrgb&w=100"
   },
   {
     id: 4,
     name: "Makhana",
     slug: "makhana",
-    image: "https://images.pexels.com/photos/7446005/pexels-photo-7446005.jpeg?auto=compress&cs=tinysrgb&w=300",
+    image: "https://images.pexels.com/photos/7446005/pexels-photo-7446005.jpeg?auto=compress&cs=tinysrgb&w=600",
     icon: "https://images.pexels.com/photos/7446005/pexels-photo-7446005.jpeg?auto=compress&cs=tinysrgb&w=100"
   },
   {
     id: 5,
     name: "Seeds",
     slug: "seeds",
-    image: "https://images.pexels.com/photos/4750274/pexels-photo-4750274.jpeg?auto=compress&cs=tinysrgb&w=300",
+    image: "https://images.pexels.com/photos/4750274/pexels-photo-4750274.jpeg?auto=compress&cs=tinysrgb&w=600",
     icon: "https://images.pexels.com/photos/4750274/pexels-photo-4750274.jpeg?auto=compress&cs=tinysrgb&w=100"
   },
   {
     id: 6,
     name: "Gift Boxes",
     slug: "gift-boxes",
-    image: "https://images.pexels.com/photos/5945770/pexels-photo-5945770.jpeg?auto=compress&cs=tinysrgb&w=300",
-    icon: "https://images.pexels.com/photos/5945770/pexels-photo-5945770.jpeg?auto=compress&cs=tinysrgb&w=100"
+    image: "https://images.pexels.com/photos/264892/pexels-photo-264892.jpeg?auto=compress&cs=tinysrgb&w=600",
+    icon: "https://images.pexels.com/photos/264892/pexels-photo-264892.jpeg?auto=compress&cs=tinysrgb&w=100"
   }
 ];
 
