@@ -22,8 +22,7 @@ const BulkOrder = () => {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  // Always use phone number from settings for WhatsApp
-  const whatsappLink = `https://wa.me/91${siteSettings.phone?.replace(/\D/g, '')}`;
+  const whatsappLink = siteSettings.whatsappLink || `https://wa.me/91${siteSettings.phone}`;
   const callLink = `tel:+91${siteSettings.phone}`;
 
   const handleWhatsApp = () => {
