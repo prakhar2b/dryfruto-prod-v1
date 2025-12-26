@@ -290,31 +290,29 @@ const ProductForm = ({ item, categories, onSave, onClose }) => {
         </div>
 
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Main Image URL *</label>
-          <input
-            type="text"
+          <label className="block text-sm font-medium text-gray-700 mb-1">Main Image *</label>
+          <ImageInput
             value={form.image}
-            onChange={(e) => setForm({ ...form, image: e.target.value })}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 outline-none"
-            placeholder="https://..."
+            onChange={(url) => setForm({ ...form, image: url })}
+            placeholder="Enter image URL or upload"
           />
           {form.image && <img src={form.image} alt="Preview" className="mt-2 h-24 object-cover rounded-lg" />}
         </div>
 
         <div className="md:col-span-2">
           <label className="block text-sm font-medium text-gray-700 mb-1">Additional Images</label>
-          <div className="flex gap-2 mb-2">
-            <input
-              type="text"
-              value={imageInput}
-              onChange={(e) => setImageInput(e.target.value)}
-              className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 outline-none"
-              placeholder="Image URL"
-            />
-            <button onClick={addImage} className="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg">
-              Add
-            </button>
-          </div>
+          <ImageInput
+            value={imageInput}
+            onChange={setImageInput}
+            placeholder="Enter image URL or upload"
+            onAdd={() => {
+              if (imageInput.trim()) {
+                setForm({ ...form, images: [...form.images, imageInput.trim()] });
+                setImageInput('');
+              }
+            }}
+            showAddButton
+          />
           <div className="flex flex-wrap gap-2">
             {form.images.map((img, i) => (
               <div key={i} className="relative">
