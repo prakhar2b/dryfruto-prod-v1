@@ -195,6 +195,26 @@ class SiteSettingsUpdate(BaseModel):
     twitterLink: Optional[str] = None
     youtubeLink: Optional[str] = None
 
+# Form Submission Models
+class BulkOrderSubmission(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = ""
+    name: str
+    company: str = ""
+    email: str = ""
+    phone: str
+    productType: str
+    quantity: str
+    message: str = ""
+    createdAt: str = ""
+    status: str = "new"  # new, contacted, completed
+
+class NewsletterSubscription(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = ""
+    email: str
+    createdAt: str = ""
+
 # ============== ROUTES ==============
 
 @api_router.get("/")
