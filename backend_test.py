@@ -357,6 +357,184 @@ class BackendTester:
             self.log_test("Theme persistence verification", False, f"Error: {str(e)}")
             return False
     
+    def test_css_customizer_save_page_styles(self) -> bool:
+        """Test PUT /api/site-settings with pageStyles object"""
+        try:
+            # Sample pageStyles data as provided in the review request
+            page_styles_data = {
+                "pageStyles": {
+                    "global": {
+                        "headerBg": "#2d1810",
+                        "headerText": "#ffffff",
+                        "accentColor": "#e11d48"
+                    },
+                    "home": {
+                        "heroBg": "#f8fafc",
+                        "heroText": "#1f2937"
+                    },
+                    "products": {
+                        "cardBg": "#ffffff",
+                        "cardBorder": "#e5e7eb"
+                    },
+                    "productDetail": {
+                        "priceBg": "#fef3c7",
+                        "priceText": "#92400e"
+                    },
+                    "bulkOrder": {
+                        "formBg": "#f9fafb",
+                        "buttonBg": "#e11d48"
+                    },
+                    "career": {
+                        "sectionBg": "#f3f4f6",
+                        "titleColor": "#374151"
+                    },
+                    "aboutUs": {
+                        "statsBg": "#fffbeb",
+                        "statsText": "#92400e"
+                    },
+                    "contact": {
+                        "mapBg": "#f8fafc",
+                        "formBorder": "#d1d5db"
+                    }
+                }
+            }
+            
+            response = self.session.put(
+                f"{self.backend_url}/site-settings",
+                json=page_styles_data,
+                headers={"Content-Type": "application/json"}
+            )
+            
+            if response.status_code != 200:
+                self.log_test("PUT /api/site-settings (pageStyles)", False, 
+                             f"Status code: {response.status_code}, Response: {response.text}")
+                return False
+            
+            data = response.json()
+            
+            # Verify pageStyles was saved
+            if "pageStyles" not in data:
+                self.log_test("PUT /api/site-settings (pageStyles)", False, "pageStyles field not found in response")
+                return False
+            
+            saved_page_styles = data["pageStyles"]
+            
+            # Check if our test values were saved
+            global_styles = saved_page_styles.get("global", {})
+            if global_styles.get("headerBg") != "#2d1810":
+                self.log_test("PUT /api/site-settings (pageStyles)", False, "Global headerBg not saved correctly")
+                return False
+            
+            if global_styles.get("accentColor") != "#e11d48":
+                self.log_test("PUT /api/site-settings (pageStyles)", False, "Global accentColor not saved correctly")
+                return False
+            
+            # Check if all page sections are present
+            expected_pages = ["global", "home", "products", "productDetail", "bulkOrder", "career", "aboutUs", "contact"]
+            missing_pages = []
+            for page in expected_pages:
+                if page not in saved_page_styles:
+                    missing_pages.append(page)
+            
+            if missing_pages:
+                self.log_test("PUT /api/site-settings (pageStyles)", False, f"Missing page sections: {missing_pages}")
+                return False
+            
+            self.log_test("PUT /api/site-settings (pageStyles)", True, 
+                         f"PageStyles saved successfully with {len(saved_page_styles)} page sections")
+            return True
+            
+        except Exception as e:
+            self.log_test("PUT /api/site-settings (pageStyles)", False, f"Error: {str(e)}")
+            return False
+    
+    def test_css_customizer_get_page_styles(self) -> Dict[Any, Any]:
+        """Test GET /api/site-settings to verify pageStyles are returned"""
+        try:
+            response = self.session.get(f"{self.backend_url}/site-settings")
+            
+            if response.status_code != 200:
+                self.log_test("GET /api/site-settings (pageStyles)", False, f"Status code: {response.status_code}")
+                return {}
+            
+            data = response.json()
+            
+            # Check if pageStyles field exists
+            if "pageStyles" not in data:
+                self.log_test("GET /api/site-settings (pageStyles)", False, "pageStyles field not found in response")
+                return {}
+            
+            page_styles = data["pageStyles"]
+            
+            # Verify it's a dictionary
+            if not isinstance(page_styles, dict):
+                self.log_test("GET /api/site-settings (pageStyles)", False, "pageStyles is not a dictionary")
+                return {}
+            
+            # Check if our test data is still there
+            global_styles = page_styles.get("global", {})
+            if global_styles.get("headerBg") != "#2d1810":
+                self.log_test("GET /api/site-settings (pageStyles)", False, "Global headerBg not retrieved correctly")
+                return {}
+            
+            if global_styles.get("accentColor") != "#e11d48":
+                self.log_test("GET /api/site-settings (pageStyles)", False, "Global accentColor not retrieved correctly")
+                return {}
+            
+            self.log_test("GET /api/site-settings (pageStyles)", True, 
+                         f"PageStyles retrieved successfully with {len(page_styles)} page sections")
+            
+            return data
+            
+        except Exception as e:
+            self.log_test("GET /api/site-settings (pageStyles)", False, f"Error: {str(e)}")
+            return {}
+    
+    def test_css_customizer_persistence(self) -> bool:
+        """Test that pageStyles changes persist by making a fresh GET request"""
+        try:
+            response = self.session.get(f"{self.backend_url}/site-settings")
+            
+            if response.status_code != 200:
+                self.log_test("CSS Customizer persistence verification", False, f"Status code: {response.status_code}")
+                return False
+            
+            data = response.json()
+            
+            # Check if our pageStyles changes are still there
+            page_styles = data.get("pageStyles", {})
+            
+            global_styles = page_styles.get("global", {})
+            header_bg = global_styles.get("headerBg")
+            accent_color = global_styles.get("accentColor")
+            
+            if header_bg != "#2d1810":
+                self.log_test("CSS Customizer persistence verification", False, f"Global headerBg not persisted. Found: {header_bg}")
+                return False
+            
+            if accent_color != "#e11d48":
+                self.log_test("CSS Customizer persistence verification", False, f"Global accentColor not persisted. Found: {accent_color}")
+                return False
+            
+            # Check if all expected page sections are still there
+            expected_pages = ["global", "home", "products", "productDetail", "bulkOrder", "career", "aboutUs", "contact"]
+            missing_pages = []
+            for page in expected_pages:
+                if page not in page_styles:
+                    missing_pages.append(page)
+            
+            if missing_pages:
+                self.log_test("CSS Customizer persistence verification", False, f"Missing page sections: {missing_pages}")
+                return False
+            
+            self.log_test("CSS Customizer persistence verification", True, 
+                         f"PageStyles persisted successfully with all {len(page_styles)} page sections")
+            return True
+            
+        except Exception as e:
+            self.log_test("CSS Customizer persistence verification", False, f"Error: {str(e)}")
+            return False
+    
     def test_persistence_verification(self) -> bool:
         """Test that bulk order changes persist by making a fresh GET request"""
         try:
