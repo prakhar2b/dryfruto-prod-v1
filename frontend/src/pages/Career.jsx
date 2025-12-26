@@ -51,7 +51,8 @@ const Career = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
+    <Layout>
+      <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
       {/* Hero Section */}
       <div className="bg-[#3d2518] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 text-center">
