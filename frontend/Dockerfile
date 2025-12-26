@@ -2,12 +2,15 @@
 FROM node:18-alpine as build
 WORKDIR /app
 
-# Copy package files first for better caching
-COPY package.json ./
-COPY yarn.lock* ./
+# Install yarn globally to ensure it's available
+RUN corepack enable && corepack prepare yarn@1.22.22 --activate
 
-# Install dependencies
-RUN yarn install --frozen-lockfile || yarn install
+# Copy package files
+COPY package.json ./
+COPY yarn.lock ./
+
+# Install dependencies (ignore engines for compatibility)
+RUN yarn install --frozen-lockfile --ignore-engines --network-timeout 100000
 
 # Copy source code
 COPY . .
