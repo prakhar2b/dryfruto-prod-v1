@@ -1,0 +1,468 @@
+// Mock data for DryFruto website
+
+export const LOGO_URL = "https://customer-assets.emergentagent.com/job_70b8c44d-b0eb-46ab-b798-c90870274405/artifacts/5olvlaa7_WhatsApp%20Image%202025-12-26%20at%2013.46.33.jpeg";
+
+export const CONTACT_INFO = {
+  phone: "9870990795",
+  whatsappLink: "https://wa.me/919870990795",
+  callLink: "tel:+919870990795",
+  email: "info@dryfruto.com",
+  address: "123, Main Street, New Delhi, India"
+};
+
+export const categories = [
+  {
+    id: 1,
+    name: "Nuts & Dry Fruits",
+    slug: "nuts-dry-fruits",
+    image: "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=300&h=300&fit=crop",
+    icon: "https://images.unsplash.com/photo-1608797178974-15b35a64ede9?w=100&h=100&fit=crop"
+  },
+  {
+    id: 2,
+    name: "Dates",
+    slug: "dates",
+    image: "https://images.unsplash.com/photo-1593001874117-c99c800e3eb5?w=300&h=300&fit=crop",
+    icon: "https://images.unsplash.com/photo-1593001874117-c99c800e3eb5?w=100&h=100&fit=crop"
+  },
+  {
+    id: 3,
+    name: "Mix Dry Fruits",
+    slug: "mix-dry-fruits",
+    image: "https://images.unsplash.com/photo-1616684000067-36952fde56ec?w=300&h=300&fit=crop",
+    icon: "https://images.unsplash.com/photo-1616684000067-36952fde56ec?w=100&h=100&fit=crop"
+  },
+  {
+    id: 4,
+    name: "Makhana",
+    slug: "makhana",
+    image: "https://images.unsplash.com/photo-1630321518146-95b8bb820e75?w=300&h=300&fit=crop",
+    icon: "https://images.unsplash.com/photo-1630321518146-95b8bb820e75?w=100&h=100&fit=crop"
+  },
+  {
+    id: 5,
+    name: "Seeds",
+    slug: "seeds",
+    image: "https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=300&h=300&fit=crop",
+    icon: "https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=100&h=100&fit=crop"
+  },
+  {
+    id: 6,
+    name: "Gift Boxes",
+    slug: "gift-boxes",
+    image: "https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=300&h=300&fit=crop",
+    icon: "https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=100&h=100&fit=crop"
+  }
+];
+
+export const sizeVariants = [
+  { label: "100 gram", multiplier: 1 },
+  { label: "250 gram", multiplier: 2.4 },
+  { label: "500 gram", multiplier: 4.5 },
+  { label: "1 kg", multiplier: 8.5 },
+  { label: "2 kg", multiplier: 16 },
+  { label: "5 kg", multiplier: 38 }
+];
+
+export const products = [
+  {
+    id: 1,
+    name: "Premium California Almonds",
+    slug: "premium-california-almonds",
+    category: "nuts-dry-fruits",
+    type: "Almonds",
+    basePrice: 145,
+    image: "https://images.unsplash.com/photo-1608797178974-15b35a64ede9?w=500&h=500&fit=crop",
+    images: [
+      "https://images.unsplash.com/photo-1608797178974-15b35a64ede9?w=500&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1574570068729-a7a65f04da7c?w=500&h=500&fit=crop"
+    ],
+    sku: "DRF001",
+    shortDescription: "Premium quality California almonds, rich in nutrients and perfect for daily consumption.",
+    description: "Our Premium California Almonds are carefully selected from the finest orchards. These almonds are known for their superior taste, perfect crunch, and high nutritional value. Rich in Vitamin E, protein, and healthy fats, they make an excellent addition to your daily diet.",
+    benefits: [
+      "Rich in Vitamin E and antioxidants",
+      "Supports heart health with healthy fats",
+      "High protein content for muscle building",
+      "Natural source of fiber for digestive health",
+      "Helps in weight management"
+    ],
+    features: ["Healthy Heart", "High Nutrition", "Gluten Free", "Cholesterol Free"]
+  },
+  {
+    id: 2,
+    name: "Jumbo Cashews Premium",
+    slug: "jumbo-cashews-premium",
+    category: "nuts-dry-fruits",
+    type: "Cashews",
+    basePrice: 185,
+    image: "https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?w=500&h=500&fit=crop",
+    images: [
+      "https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?w=500&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=500&h=500&fit=crop"
+    ],
+    sku: "DRF002",
+    shortDescription: "Large, creamy jumbo cashews with a rich buttery taste.",
+    description: "Our Jumbo Cashews are the finest quality whole cashews, carefully graded for size and taste. These premium cashews have a naturally sweet, buttery flavor and satisfying crunch that makes them perfect for snacking or cooking.",
+    benefits: [
+      "Excellent source of magnesium and zinc",
+      "Promotes healthy brain function",
+      "Supports bone health",
+      "Boosts immunity naturally",
+      "Good for eye health"
+    ],
+    features: ["Healthy Heart", "High Nutrition", "Gluten Free", "Cholesterol Free"]
+  },
+  {
+    id: 3,
+    name: "Roasted Salted Cashews",
+    slug: "roasted-salted-cashews",
+    category: "nuts-dry-fruits",
+    type: "Roasted Cashews",
+    basePrice: 210,
+    image: "https://images.unsplash.com/photo-1563292769-4e05b684851a?w=500&h=500&fit=crop",
+    images: [
+      "https://images.unsplash.com/photo-1563292769-4e05b684851a?w=500&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?w=500&h=500&fit=crop"
+    ],
+    sku: "DRF003",
+    shortDescription: "Perfectly roasted cashews with a hint of Himalayan salt.",
+    description: "Our Roasted Salted Cashews are dry roasted to perfection and lightly seasoned with premium Himalayan salt. The roasting process enhances the natural sweetness of cashews while the salt adds a savory edge.",
+    benefits: [
+      "Satisfying crunchy snack",
+      "Great source of plant protein",
+      "Contains heart-healthy fats",
+      "Rich in copper and manganese",
+      "Perfect for on-the-go energy"
+    ],
+    features: ["Healthy Heart", "High Nutrition", "Gluten Free", "Cholesterol Free"]
+  },
+  {
+    id: 4,
+    name: "Premium Walnut Kernels",
+    slug: "premium-walnut-kernels",
+    category: "nuts-dry-fruits",
+    type: "Walnuts",
+    basePrice: 250,
+    image: "https://images.unsplash.com/photo-1596362601603-90809e495b47?w=500&h=500&fit=crop",
+    images: [
+      "https://images.unsplash.com/photo-1596362601603-90809e495b47?w=500&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1600189261867-30e5ffe7b8da?w=500&h=500&fit=crop"
+    ],
+    sku: "DRF004",
+    shortDescription: "Light halves walnut kernels, perfect for brain health.",
+    description: "Our Premium Walnut Kernels are carefully shelled and graded to give you the best quality walnuts. Known as the brain food, these walnuts are rich in omega-3 fatty acids and antioxidants.",
+    benefits: [
+      "Excellent source of omega-3 fatty acids",
+      "Supports brain health and cognitive function",
+      "Anti-inflammatory properties",
+      "Promotes healthy sleep patterns",
+      "Good for skin health"
+    ],
+    features: ["Healthy Heart", "High Nutrition", "Gluten Free", "Cholesterol Free"]
+  },
+  {
+    id: 5,
+    name: "Afghan Black Raisins",
+    slug: "afghan-black-raisins",
+    category: "nuts-dry-fruits",
+    type: "Raisins",
+    basePrice: 85,
+    image: "https://images.unsplash.com/photo-1596591868231-a41d1c98958a?w=500&h=500&fit=crop",
+    images: [
+      "https://images.unsplash.com/photo-1596591868231-a41d1c98958a?w=500&h=500&fit=crop"
+    ],
+    sku: "DRF005",
+    shortDescription: "Premium Afghan black raisins, naturally sweet and juicy.",
+    description: "Our Afghan Black Raisins are sun-dried grapes from the finest vineyards of Afghanistan. These raisins are naturally sweet, plump, and juicy, making them perfect for snacking and cooking.",
+    benefits: [
+      "Natural source of iron",
+      "Boosts energy instantly",
+      "Good for digestive health",
+      "Helps in bone strengthening",
+      "Natural sweetener alternative"
+    ],
+    features: ["Healthy Heart", "High Nutrition", "Gluten Free", "Cholesterol Free"]
+  },
+  {
+    id: 6,
+    name: "Premium Mix Dry Fruits",
+    slug: "premium-mix-dry-fruits",
+    category: "mix-dry-fruits",
+    type: "Mix dry fruits",
+    basePrice: 165,
+    image: "https://images.unsplash.com/photo-1616684000067-36952fde56ec?w=500&h=500&fit=crop",
+    images: [
+      "https://images.unsplash.com/photo-1616684000067-36952fde56ec?w=500&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=500&h=500&fit=crop"
+    ],
+    sku: "DRF006",
+    shortDescription: "Perfect blend of almonds, cashews, raisins, and more.",
+    description: "Our Premium Mix Dry Fruits is a carefully curated blend of the finest dry fruits including almonds, cashews, raisins, walnuts, and dates. This nutritious mix provides a complete package of health benefits.",
+    benefits: [
+      "Complete nutritional package",
+      "Variety of flavors and textures",
+      "Convenient and healthy snacking",
+      "Balanced energy source",
+      "Perfect for gift giving"
+    ],
+    features: ["Healthy Heart", "High Nutrition", "Gluten Free", "Cholesterol Free"]
+  },
+  {
+    id: 7,
+    name: "Pista Akbari Premium",
+    slug: "pista-akbari-premium",
+    category: "nuts-dry-fruits",
+    type: "Pistachios",
+    basePrice: 195,
+    image: "https://images.unsplash.com/photo-1525706069475-35c94e1bf99d?w=500&h=500&fit=crop",
+    images: [
+      "https://images.unsplash.com/photo-1525706069475-35c94e1bf99d?w=500&h=500&fit=crop"
+    ],
+    sku: "DRF007",
+    shortDescription: "Large Akbari pistachios with vibrant green color.",
+    description: "Our Pista Akbari are the finest quality Iranian pistachios known for their large size, vibrant green color, and distinctive flavor. These premium pistachios are perfect for snacking and culinary use.",
+    benefits: [
+      "Excellent source of protein",
+      "Rich in fiber for digestion",
+      "Contains healthy fats",
+      "Good for eye health",
+      "Supports weight management"
+    ],
+    features: ["Healthy Heart", "High Nutrition", "Gluten Free", "Cholesterol Free"]
+  },
+  {
+    id: 8,
+    name: "Makhana Plain Premium",
+    slug: "makhana-plain-premium",
+    category: "makhana",
+    type: "Makhana",
+    basePrice: 175,
+    image: "https://images.unsplash.com/photo-1630321518146-95b8bb820e75?w=500&h=500&fit=crop",
+    images: [
+      "https://images.unsplash.com/photo-1630321518146-95b8bb820e75?w=500&h=500&fit=crop"
+    ],
+    sku: "DRF008",
+    shortDescription: "Light and crunchy fox nuts, perfect for healthy snacking.",
+    description: "Our Premium Makhana (Fox Nuts) are handpicked and processed to retain their natural goodness. These light, crunchy puffs are a popular healthy snack that can be roasted with minimal oil or eaten as is.",
+    benefits: [
+      "Low calorie healthy snack",
+      "Rich in calcium and phosphorus",
+      "Good for diabetics",
+      "Anti-aging properties",
+      "Aids in weight loss"
+    ],
+    features: ["Healthy Heart", "High Nutrition", "Gluten Free", "Cholesterol Free"]
+  },
+  {
+    id: 9,
+    name: "Premium Dried Figs (Anjeer)",
+    slug: "premium-dried-figs",
+    category: "nuts-dry-fruits",
+    type: "Dried Fig",
+    basePrice: 220,
+    image: "https://images.unsplash.com/photo-1601379760883-1bb497c558e4?w=500&h=500&fit=crop",
+    images: [
+      "https://images.unsplash.com/photo-1601379760883-1bb497c558e4?w=500&h=500&fit=crop"
+    ],
+    sku: "DRF009",
+    shortDescription: "Soft and sweet Turkish dried figs, naturally delicious.",
+    description: "Our Premium Dried Figs are sourced from Turkey and are known for their soft texture and natural sweetness. These figs are sun-dried to preserve their nutrients and can be eaten as snacks or added to various dishes.",
+    benefits: [
+      "Excellent source of dietary fiber",
+      "Rich in potassium for heart health",
+      "Contains calcium for strong bones",
+      "Natural remedy for constipation",
+      "Good source of antioxidants"
+    ],
+    features: ["Healthy Heart", "High Nutrition", "Gluten Free", "Cholesterol Free"]
+  },
+  {
+    id: 10,
+    name: "Pumpkin Seeds Raw",
+    slug: "pumpkin-seeds-raw",
+    category: "seeds",
+    type: "Pumpkin Seeds",
+    basePrice: 125,
+    image: "https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=500&h=500&fit=crop",
+    images: [
+      "https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=500&h=500&fit=crop"
+    ],
+    sku: "DRF010",
+    shortDescription: "Raw green pumpkin seeds, packed with zinc and magnesium.",
+    description: "Our Raw Pumpkin Seeds are hulled and ready to eat. These nutrient-dense seeds are an excellent source of zinc, magnesium, and plant-based protein. Perfect for adding to salads, smoothies, or eating as a snack.",
+    benefits: [
+      "Excellent source of zinc",
+      "High in magnesium",
+      "Supports prostate health",
+      "Good for sleep quality",
+      "Rich in antioxidants"
+    ],
+    features: ["Healthy Heart", "High Nutrition", "Gluten Free", "Cholesterol Free"]
+  },
+  {
+    id: 11,
+    name: "Sunflower Seeds Raw",
+    slug: "sunflower-seeds-raw",
+    category: "seeds",
+    type: "Sunflower Seeds",
+    basePrice: 95,
+    image: "https://images.unsplash.com/photo-1573821663912-569905455b1c?w=500&h=500&fit=crop",
+    images: [
+      "https://images.unsplash.com/photo-1573821663912-569905455b1c?w=500&h=500&fit=crop"
+    ],
+    sku: "DRF011",
+    shortDescription: "Nutrient-rich sunflower seeds, great for heart health.",
+    description: "Our Raw Sunflower Seeds are a nutritional powerhouse packed with vitamin E, selenium, and healthy fats. These versatile seeds can be sprinkled on salads, added to baked goods, or enjoyed as a standalone snack.",
+    benefits: [
+      "Rich in Vitamin E",
+      "Contains selenium for immunity",
+      "Supports healthy skin",
+      "Good for cholesterol management",
+      "Anti-inflammatory benefits"
+    ],
+    features: ["Healthy Heart", "High Nutrition", "Gluten Free", "Cholesterol Free"]
+  },
+  {
+    id: 12,
+    name: "Medjool Dates Premium",
+    slug: "medjool-dates-premium",
+    category: "dates",
+    type: "Dates",
+    basePrice: 320,
+    image: "https://images.unsplash.com/photo-1593001874117-c99c800e3eb5?w=500&h=500&fit=crop",
+    images: [
+      "https://images.unsplash.com/photo-1593001874117-c99c800e3eb5?w=500&h=500&fit=crop"
+    ],
+    sku: "DRF012",
+    shortDescription: "Large, soft Medjool dates with caramel-like sweetness.",
+    description: "Our Premium Medjool Dates are known as the 'King of Dates' for their large size, soft texture, and rich caramel-like taste. These dates are perfect for snacking, baking, and as a natural sweetener.",
+    benefits: [
+      "Natural energy booster",
+      "Rich in potassium and fiber",
+      "Excellent for bone health",
+      "Supports digestive health",
+      "Natural sweetener alternative"
+    ],
+    features: ["Healthy Heart", "High Nutrition", "Gluten Free", "Cholesterol Free"]
+  }
+];
+
+export const giftBoxes = [
+  {
+    id: 101,
+    name: "Premium Gift Hamper",
+    image: "https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=500&h=500&fit=crop",
+    price: 1499
+  },
+  {
+    id: 102,
+    name: "Festive Delight Box",
+    image: "https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=500&h=500&fit=crop",
+    price: 1999
+  },
+  {
+    id: 103,
+    name: "Corporate Gift Set",
+    image: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&h=500&fit=crop",
+    price: 2499
+  },
+  {
+    id: 104,
+    name: "Royal Collection Box",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&h=500&fit=crop",
+    price: 3499
+  },
+  {
+    id: 105,
+    name: "Anniversary Special",
+    image: "https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=500&h=500&fit=crop",
+    price: 2999
+  },
+  {
+    id: 106,
+    name: "Diwali Gift Box",
+    image: "https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=500&h=500&fit=crop",
+    price: 1799
+  }
+];
+
+export const testimonials = [
+  {
+    id: 1,
+    name: "Priya Sharma",
+    review: "Excellent quality dry fruits! I've been ordering from DryFruto for over a year now. The almonds and cashews are always fresh and delicious.",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop"
+  },
+  {
+    id: 2,
+    name: "Rajesh Kumar",
+    review: "Best place for premium dry fruits. The packaging is excellent and delivery is always on time. Highly recommended!",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
+  },
+  {
+    id: 3,
+    name: "Anita Patel",
+    review: "The gift boxes are perfect for occasions. Ordered for Diwali and everyone loved them. Great quality products!",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop"
+  },
+  {
+    id: 4,
+    name: "Mohammed Ali",
+    review: "Fresh and premium quality nuts. The Makhana is especially good - crispy and tasty. Will order again!",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop"
+  },
+  {
+    id: 5,
+    name: "Sunita Verma",
+    review: "Amazing customer service and product quality. The dates are the best I've ever had. Thank you DryFruto!",
+    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop"
+  },
+  {
+    id: 6,
+    name: "Vikram Singh",
+    review: "Top-notch quality with amazing flavor. The mix dry fruits pack is perfect for daily snacking. Highly satisfied!",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop"
+  }
+];
+
+export const heroSlides = [
+  {
+    id: 1,
+    title: "Premium Quality Dry Fruits",
+    subtitle: "Live With Health",
+    description: "Discover our handpicked selection of premium dry fruits, nuts, and seeds",
+    image: "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=1920&h=800&fit=crop",
+    cta: "Shop Now"
+  },
+  {
+    id: 2,
+    title: "Festival Gift Hampers",
+    subtitle: "Celebrate with Health",
+    description: "Beautiful gift boxes perfect for every occasion",
+    image: "https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=1920&h=800&fit=crop",
+    cta: "View Collection"
+  },
+  {
+    id: 3,
+    title: "Healthy Seeds & Makhana",
+    subtitle: "Nature's Best",
+    description: "Explore our range of nutrient-rich seeds and fox nuts",
+    image: "https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=1920&h=800&fit=crop",
+    cta: "Explore Now"
+  }
+];
+
+export const productTypes = [
+  "Almonds",
+  "Cashews",
+  "Roasted Cashews",
+  "Walnuts",
+  "Raisins",
+  "Mix dry fruits",
+  "Pistachios",
+  "Makhana",
+  "Dried Fig",
+  "Pumpkin Seeds",
+  "Sunflower Seeds"
+];
