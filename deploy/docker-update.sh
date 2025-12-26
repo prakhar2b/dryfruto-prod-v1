@@ -33,7 +33,7 @@ DOMAIN=$(grep SITE_URL .env | cut -d '=' -f2 | sed 's|http://||' | sed 's|https:
 if git diff HEAD~1 --name-only | grep -q "frontend/"; then
   echo -e "${YELLOW}Frontend changed. Rebuilding...${NC}"
   cd frontend
-  npm install
+  npm install --legacy-peer-deps
   npm run build
   cd ..
 fi
