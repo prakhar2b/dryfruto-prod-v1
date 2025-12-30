@@ -12,7 +12,7 @@ import os
 from typing import Dict, Any
 
 # Get backend URL from frontend .env file
-BACKEND_URL = "https://dryfruthealth.preview.emergentagent.com/api"
+BACKEND_URL = "https://dryfruto-deploy.preview.emergentagent.com/api"
 
 class BackendTester:
     def __init__(self):
