@@ -588,7 +588,7 @@ async def delete_testimonial(testimonial_id: str):
 # ----- Gift Box Routes -----
 @api_router.get("/gift-boxes", response_model=List[GiftBox])
 async def get_gift_boxes():
-    gift_boxes = await db.gift_boxes.find({}, {"_id": 0}).to_list(100)
+    gift_boxes = await ensure_collection_data("gift_boxes", get_default_gift_boxes)
     return gift_boxes
 
 @api_router.post("/gift-boxes", response_model=GiftBox)
