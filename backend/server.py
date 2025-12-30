@@ -746,10 +746,16 @@ logger = logging.getLogger(__name__)
 async def startup_db_client():
     """Auto-seed database with default data if empty"""
     try:
-        # Check if data already exists
+        # Check if data already exists by checking products count
         existing_products = await db.products.count_documents({})
         if existing_products > 0:
             logger.info(f"Database already has {existing_products} products, skipping auto-seed")
+            return
+        
+        # Also check if any other collections have data (in case products were deleted but others remain)
+        existing_categories = await db.categories.count_documents({})
+        if existing_categories > 0:
+            logger.info(f"Database already has {existing_categories} categories, skipping auto-seed")
             return
         
         logger.info("Database is empty, auto-seeding with default data...")
@@ -760,6 +766,13 @@ async def startup_db_client():
         except ImportError as e:
             logger.error(f"Failed to import seed_data: {e}")
             return
+        
+        # Clear any partial data first (in case of interrupted seed)
+        await db.categories.delete_many({})
+        await db.products.delete_many({})
+        await db.hero_slides.delete_many({})
+        await db.testimonials.delete_many({})
+        await db.gift_boxes.delete_many({})
         
         # Insert categories
         if categories:
