@@ -1,4 +1,4 @@
-# Backend Dockerfile - Python FastAPI
+# Backend Dockerfile - Python FastAPI with Auto-Seed
 FROM python:3.11-slim
 
 WORKDIR /app
@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy backend code
+# Copy backend code (including seed_data.py for auto-seeding)
 COPY . ./
 
 # Create uploads directory
@@ -20,8 +20,9 @@ RUN mkdir -p /app/uploads
 
 EXPOSE 8001
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+# Health check - verifies API is responding
+HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
     CMD curl -f http://localhost:8001/api/health || exit 1
 
+# Start the server - auto-seed happens on startup when DB is empty
 CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8001"]
