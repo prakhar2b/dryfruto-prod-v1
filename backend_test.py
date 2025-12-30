@@ -850,56 +850,90 @@ class BackendTester:
         print(f"Backend URL: {self.backend_url}")
         print("=" * 60)
         
+        # DEPLOYMENT FIXES TESTS (Priority Tests)
+        print("🔧 DEPLOYMENT FIXES TESTS")
+        print("=" * 60)
+        
         # Test 1: API Connectivity
         if not self.test_api_connectivity():
             print("\n❌ API connectivity failed. Stopping tests.")
             return False
         
-        # Test 2: Get site settings
+        # Test 2: Health Check Endpoint (NEW)
+        self.test_health_check_endpoint()
+        
+        # Test 3: Seed Data Endpoint (IMPROVED)
+        self.test_seed_data_endpoint()
+        
+        print("\n" + "=" * 60)
+        print("📊 CORE API VERIFICATION TESTS")
+        print("=" * 60)
+        
+        # Test 4: Core API - Categories
+        self.test_core_api_categories()
+        
+        # Test 5: Core API - Products
+        self.test_core_api_products()
+        
+        # Test 6: Core API - Site Settings
         current_settings = self.test_get_site_settings()
         if not current_settings:
-            print("\n❌ Failed to get site settings. Stopping tests.")
-            return False
+            print("\n❌ Failed to get site settings.")
         
-        # Test 3: Update product types
-        if not self.test_update_site_settings_product_types(current_settings):
-            print("\n❌ Failed to update product types.")
+        # Test 7: Core API - Hero Slides
+        self.test_core_api_hero_slides()
         
-        # Test 4: Update benefits
-        if not self.test_update_site_settings_benefits(current_settings):
-            print("\n❌ Failed to update benefits.")
+        # Test 8: Core API - Testimonials
+        self.test_core_api_testimonials()
         
-        # Test 5: Verify bulk order persistence
+        # Test 9: Core API - Gift Boxes
+        self.test_core_api_gift_boxes()
+        
+        print("\n" + "=" * 60)
+        print("⚙️ BULK ORDER SETTINGS TESTS")
+        print("=" * 60)
+        
+        # Test 10: Update product types
+        if current_settings:
+            if not self.test_update_site_settings_product_types(current_settings):
+                print("\n❌ Failed to update product types.")
+        
+        # Test 11: Update benefits
+        if current_settings:
+            if not self.test_update_site_settings_benefits(current_settings):
+                print("\n❌ Failed to update benefits.")
+        
+        # Test 12: Verify bulk order persistence
         self.test_persistence_verification()
         
         print("\n" + "=" * 60)
         print("🎨 THEME CUSTOMIZER TESTS")
         print("=" * 60)
         
-        # Test 6: Theme Export API
+        # Test 13: Theme Export API
         export_data = self.test_theme_export_api()
         
-        # Test 7: Theme Import API
+        # Test 14: Theme Import API
         if export_data:
             self.test_theme_import_api(export_data)
         
-        # Test 8: Site Settings with Theme
+        # Test 15: Site Settings with Theme
         self.test_site_settings_with_theme()
         
-        # Test 9: Theme Persistence
+        # Test 16: Theme Persistence
         self.test_theme_persistence_verification()
         
         print("\n" + "=" * 60)
         print("🎨 CSS CUSTOMIZER TESTS")
         print("=" * 60)
         
-        # Test 10: CSS Customizer Save Page Styles
+        # Test 17: CSS Customizer Save Page Styles
         self.test_css_customizer_save_page_styles()
         
-        # Test 11: CSS Customizer Get Page Styles
+        # Test 18: CSS Customizer Get Page Styles
         css_settings = self.test_css_customizer_get_page_styles()
         
-        # Test 12: CSS Customizer Persistence
+        # Test 19: CSS Customizer Persistence
         self.test_css_customizer_persistence()
         
         # Summary
