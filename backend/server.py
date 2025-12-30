@@ -804,32 +804,36 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-@app.on_event("startup")
-async def startup_db_client():
-    """Auto-seed database with default data if empty"""
-    try:
-        # Check if data already exists by checking products count
-        existing_products = await db.products.count_documents({})
-        if existing_products > 0:
-            logger.info(f"Database already has {existing_products} products, skipping auto-seed")
-            return
-        
-        # Also check if any other collections have data (in case products were deleted but others remain)
-        existing_categories = await db.categories.count_documents({})
-        if existing_categories > 0:
-            logger.info(f"Database already has {existing_categories} categories, skipping auto-seed")
-            return
-        
-        logger.info("Database is empty, auto-seeding with default data...")
-        
-        # Import mock data
+async def wait_for_mongodb(max_retries=30, delay=2):
+    """Wait for MongoDB to be ready"""
+    import asyncio
+    for i in range(max_retries):
         try:
-            from seed_data import categories, products, hero_slides, testimonials, gift_boxes, site_settings
-        except ImportError as e:
-            logger.error(f"Failed to import seed_data: {e}")
-            return
+            await db.command("ping")
+            logger.info("MongoDB connection successful")
+            return True
+        except Exception as e:
+            logger.warning(f"MongoDB not ready (attempt {i+1}/{max_retries}): {e}")
+            await asyncio.sleep(delay)
+    logger.error("Failed to connect to MongoDB after all retries")
+    return False
+
+async def do_seed_data():
+    """Perform the actual seeding"""
+    try:
+        # Import seed data from the same directory
+        import sys
+        import os
         
-        # Clear any partial data first (in case of interrupted seed)
+        # Ensure the backend directory is in the path
+        backend_dir = os.path.dirname(os.path.abspath(__file__))
+        if backend_dir not in sys.path:
+            sys.path.insert(0, backend_dir)
+        
+        # Now import seed_data
+        from seed_data import categories, products, hero_slides, testimonials, gift_boxes, site_settings
+        
+        # Clear existing data
         await db.categories.delete_many({})
         await db.products.delete_many({})
         await db.hero_slides.delete_many({})
@@ -869,7 +873,44 @@ async def startup_db_client():
         )
         logger.info("Seeded site settings")
         
-        logger.info("Auto-seed completed successfully!")
+        return {
+            "categories": len(categories),
+            "products": len(products),
+            "heroSlides": len(hero_slides),
+            "testimonials": len(testimonials),
+            "giftBoxes": len(gift_boxes)
+        }
+    except ImportError as e:
+        logger.error(f"Failed to import seed_data module: {e}")
+        raise
+    except Exception as e:
+        logger.error(f"Error during seeding: {e}")
+        raise
+
+@app.on_event("startup")
+async def startup_db_client():
+    """Auto-seed database with default data if empty"""
+    try:
+        # Wait for MongoDB to be ready
+        if not await wait_for_mongodb():
+            logger.error("Cannot auto-seed: MongoDB not available")
+            return
+        
+        # Check if data already exists
+        existing_products = await db.products.count_documents({})
+        if existing_products > 0:
+            logger.info(f"Database already has {existing_products} products, skipping auto-seed")
+            return
+        
+        existing_categories = await db.categories.count_documents({})
+        if existing_categories > 0:
+            logger.info(f"Database already has {existing_categories} categories, skipping auto-seed")
+            return
+        
+        logger.info("Database is empty, auto-seeding with default data...")
+        result = await do_seed_data()
+        logger.info(f"Auto-seed completed successfully! {result}")
+        
     except Exception as e:
         logger.error(f"Auto-seed error: {e}")
 
