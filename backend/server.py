@@ -491,7 +491,7 @@ async def delete_category(category_id: str):
 # ----- Product Routes -----
 @api_router.get("/products", response_model=List[Product])
 async def get_products():
-    products = await db.products.find({}, {"_id": 0}).to_list(1000)
+    products = await ensure_collection_data("products", get_default_products)
     return products
 
 @api_router.get("/products/{product_id}", response_model=Product)
