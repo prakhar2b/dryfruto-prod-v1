@@ -142,7 +142,7 @@ docker-compose up -d nginx
 
 #### Step 7: Test HTTPS
 ```
-https://statellmarketing.com:9443
+https://statellmarketing.com:8443
 ```
 
 ---
@@ -152,23 +152,23 @@ https://statellmarketing.com:9443
 ```
 Internet
     │
-    ├─── Port 9001 (HTTP)
+    ├─── Port 8080 (HTTP)
     │
-    └─── Port 9443 (HTTPS)
+    └─── Port 8443 (HTTPS)
          │
          ▼
 ┌─────────────────────────────────────┐
-│      sm2024proxy01 (Nginx)          │
+│      dryfruto_proxy (Nginx)         │
 │   statellmarketing.com              │
 └─────────────────┬───────────────────┘
                   │
     ┌─────────────┼───────────────┐
     ▼             ▼               ▼
 ┌────────┐  ┌──────────┐  ┌───────────┐
-│sm2024  │  │ sm2024   │  │ sm2024    │
-│web01   │  │ api01    │  │ db01      │
+│dryfruto│  │ dryfruto │  │ dryfruto  │
+│frontend│  │ backend  │  │ db        │
 │Frontend│  │ Backend  │  │ MongoDB   │
-│ :80    │  │  :8001   │  │ :27017    │
+│ :3000  │  │  :8001   │  │ :27017    │
 │React   │  │ FastAPI  │  │           │
 └────────┘  └──────────┘  └───────────┘
                 │
