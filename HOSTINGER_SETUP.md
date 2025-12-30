@@ -198,10 +198,10 @@ Internet
 docker-compose logs -f
 
 # View backend logs (check for auto-seed messages)
-docker logs sm2024api01
+docker logs dryfruto_backend
 
 # View nginx logs only
-docker logs sm2024proxy01
+docker logs dryfruto_proxy
 
 # Restart all services
 docker-compose restart
@@ -215,10 +215,10 @@ docker-compose up -d
 docker ps
 
 # Access MongoDB
-docker exec -it sm2024db01 mongosh
+docker exec -it dryfruto_db mongosh
 
 # Check if data was seeded
-docker exec -it sm2024db01 mongosh dryfruto --eval "db.products.countDocuments()"
+docker exec -it dryfruto_db mongosh dryfruto --eval "db.products.countDocuments()"
 ```
 
 ---
@@ -229,7 +229,7 @@ docker exec -it sm2024db01 mongosh dryfruto --eval "db.products.countDocuments()
 
 **Option 1: Check if auto-seed ran**
 ```bash
-docker logs sm2024api01 | grep -i seed
+docker logs dryfruto_backend | grep -i seed
 ```
 
 You should see:
@@ -243,14 +243,14 @@ Auto-seed completed successfully!
 ```
 
 **Option 2: Manually trigger seed via Admin Panel**
-1. Go to `http://statellmarketing.com:9001/admin`
+1. Go to `http://statellmarketing.com:8080/admin`
 2. Click "Seed Initial Data" button
 3. Confirm the action
 4. Wait for success message
 
 **Option 3: Manually trigger seed via API**
 ```bash
-curl -X POST http://statellmarketing.com:9001/api/seed-data
+curl -X POST http://statellmarketing.com:8080/api/seed-data
 ```
 
 Expected response:
@@ -260,7 +260,7 @@ Expected response:
 
 ### Backend not starting?
 ```bash
-docker logs sm2024api01
+docker logs dryfruto_backend
 ```
 
 ### MongoDB connection issues?
@@ -269,16 +269,16 @@ docker logs sm2024api01
 docker ps | grep mongodb
 
 # Check MongoDB logs
-docker logs sm2024db01
+docker logs dryfruto_db
 
 # Test MongoDB connection from backend container
-docker exec -it sm2024api01 python -c "from motor.motor_asyncio import AsyncIOMotorClient; c = AsyncIOMotorClient('mongodb://mongodb:27017'); print('Connected!')"
+docker exec -it dryfruto_backend python -c "from motor.motor_asyncio import AsyncIOMotorClient; c = AsyncIOMotorClient('mongodb://mongodb:27017'); print('Connected!')"
 ```
 
 ### Import error for seed_data?
 The seed_data.py file should be in /app/ inside the backend container:
 ```bash
-docker exec -it sm2024api01 ls -la /app/
+docker exec -it dryfruto_backend ls -la /app/
 # Should show seed_data.py
 ```
 
@@ -293,8 +293,8 @@ Make sure these ports are open on your VPS:
 ufw status
 
 # Open required ports
-ufw allow 9001/tcp   # HTTP
-ufw allow 9443/tcp   # HTTPS
+ufw allow 8080/tcp   # HTTP
+ufw allow 8443/tcp   # HTTPS
 ufw allow 22/tcp     # SSH
 
 # Enable firewall
