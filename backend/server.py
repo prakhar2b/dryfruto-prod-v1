@@ -338,6 +338,16 @@ class NewsletterSubscription(BaseModel):
 async def root():
     return {"message": "DryFruto API"}
 
+@api_router.get("/health")
+async def health_check():
+    """Health check endpoint for Docker container"""
+    try:
+        # Simple database connectivity check
+        await db.command("ping")
+        return {"status": "healthy", "database": "connected"}
+    except Exception as e:
+        return {"status": "unhealthy", "database": "disconnected", "error": str(e)}
+
 # ----- Status Check Routes -----
 @api_router.post("/status", response_model=StatusCheck)
 async def create_status_check(input: StatusCheckCreate):
