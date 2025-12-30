@@ -18,11 +18,11 @@ COPY . ./
 # Create uploads directory
 RUN mkdir -p /app/uploads
 
-EXPOSE 8001
+EXPOSE 8005
 
 # Health check - verifies API is responding
 HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
-    CMD curl -f http://localhost:8001/api/health || exit 1
+    CMD curl -f http://localhost:8005/api/health || exit 1
 
 # Start the server - auto-seed happens on startup when DB is empty
-CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8001"]
+CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8005"]
