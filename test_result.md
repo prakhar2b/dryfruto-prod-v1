@@ -408,6 +408,18 @@ backend:
         agent: "testing"
         comment: "✅ SEED INITIAL DATA BACKEND API TESTING COMPLETE: Comprehensive testing of all seed data functionality confirms everything is working perfectly. All 9/9 tests passed successfully. 1) Health Check Endpoint - GET /api/health returns proper JSON {'status': 'healthy', 'database': 'connected'} confirming backend and MongoDB connectivity. 2) Seed Data Endpoint - POST /api/seed-data successfully seeds database with expected counts: 6 categories, 12 products, 3 heroSlides, 6 testimonials, 6 giftBoxes. 3) Data Verification - All GET endpoints return correct data: /api/categories (6 items), /api/products (12 items), /api/testimonials (6 items), /api/gift-boxes (6 items), /api/hero-slides (3 items). 4) Site Settings - GET /api/site-settings returns default settings with correct businessName 'DryFruto' and slogan 'Live With Health'. 5) Site Settings Save - PUT /api/site-settings successfully updates businessName to 'Test Business', verifies persistence, and restores to 'DryFruto'. All API endpoints working correctly with proper data validation and persistence. Backend seed data functionality is fully operational and ready for production use."
 
+  - task: "Data Seeding After Docker-Compose Changes - Complete Verification"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ DATA SEEDING AFTER DOCKER-COMPOSE CHANGES TESTING COMPLETE: All 10/10 tests passed successfully after docker-compose configuration changes. 1) API Connectivity - Backend API accessible at https://dryfruto-deploy.preview.emergentagent.com/api. 2) Health Check - GET /api/health returns proper JSON {'status': 'healthy', 'database': 'connected'} confirming MongoDB connectivity. 3) Seed Data Functionality - POST /api/seed-data returns expected response with correct counts: 6 categories, 12 products, 3 heroSlides, 6 testimonials, 6 giftBoxes. 4) Data Verification - All GET endpoints return exact expected counts: /api/categories (6 items), /api/products (12 items), /api/hero-slides (3 items), /api/testimonials (6 items), /api/gift-boxes (6 items). 5) Site Settings - GET /api/site-settings returns proper default settings with businessName='DryFruto' and slogan='Live With Health'. All data seeding functionality working correctly after removing external ports from mongodb, backend, and frontend containers with only nginx having external ports. Backend is fully operational and ready for production deployment."
+
   - task: "CSS Customizer Frontend - Complete UI and Live Preview"
     implemented: true
     working: true
