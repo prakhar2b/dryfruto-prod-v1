@@ -21,7 +21,7 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50">
       {/* Top Bar */}
-      <div className="bg-[#4a7a32] text-white py-2">
+      <div className="bg-[#689F38] text-white py-2">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center text-sm">
           <div className="flex items-center gap-2">
             <Phone className="w-4 h-4" />
@@ -36,7 +36,7 @@ const Header = () => {
       </div>
 
       {/* Main Header */}
-      <div className="bg-[#5a8f3e] shadow-lg">
+      <div className="bg-[#7CB342] shadow-lg">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
@@ -44,7 +44,7 @@ const Header = () => {
               <img 
                 src={LOGO_URL} 
                 alt={siteSettings.businessName} 
-                className="h-14 w-14 rounded-full object-cover border-2 border-[#C1E899]"
+                className="h-14 w-14 rounded-full object-cover border-2 border-white"
               />
               <div className="hidden sm:block">
                 <h1 className="text-xl font-bold text-white">{siteSettings.businessName}</h1>
@@ -69,7 +69,7 @@ const Header = () => {
                     <Link
                       key={cat.id}
                       to={`/products?category=${cat.slug}`}
-                      className="block px-4 py-2 text-gray-700 hover:bg-[#e3f1d5] hover:text-[#5a8f3e] transition-colors"
+                      className="block px-4 py-2 text-gray-700 hover:bg-[#e8f5e0] hover:text-[#7CB342] transition-colors"
                     >
                       {cat.name}
                     </Link>
@@ -102,7 +102,7 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden bg-[#4a7a32] border-t border-[#5a8f3e]">
+          <div className="lg:hidden bg-[#689F38] border-t border-[#7CB342]">
             <div className="max-w-7xl mx-auto px-4 py-4">
               <nav className="flex flex-col gap-3">
                 <a 
@@ -112,7 +112,7 @@ const Header = () => {
                 >
                   Home
                 </a>
-                <div className="border-t border-[#5a8f3e] pt-2">
+                <div className="border-t border-[#7CB342] pt-2">
                   <p className="text-[#C1E899] text-sm font-medium mb-2">Shop</p>
                   {categories.map((cat) => (
                     <Link
@@ -127,7 +127,7 @@ const Header = () => {
                 </div>
                 <Link 
                   to="/bulk-order" 
-                  className="text-white hover:text-[#C1E899] py-2 border-t border-[#5a8f3e] transition-colors"
+                  className="text-white hover:text-[#C1E899] py-2 border-t border-[#7CB342] transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Bulk Order
@@ -141,7 +141,7 @@ const Header = () => {
                 </Link>
                 <Link 
                   to="/about" 
-                  className="text-white hover:text-[#C1E899] py-2 border-t border-[#5a8f3e] transition-colors"
+                  className="text-white hover:text-[#C1E899] py-2 border-t border-[#7CB342] transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   About Us
