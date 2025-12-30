@@ -77,7 +77,7 @@ Login to [Hostinger Control Panel](https://hpanel.hostinger.com):
 
 After deployment, test HTTP access:
 ```
-http://statellmarketing.com:9001
+http://statellmarketing.com:8080
 ```
 
 The website should load with all products and data already populated!
@@ -86,10 +86,10 @@ If HTTP works, proceed to SSL setup.
 
 ---
 
-## SSL/HTTPS Configuration (Port 9443)
+## SSL/HTTPS Configuration (Port 8443)
 
 ### Why HTTPS shows error initially?
-HTTPS requires SSL certificates. Without certificates, nginx cannot start the HTTPS server, causing connection errors on port 9443.
+HTTPS requires SSL certificates. Without certificates, nginx cannot start the HTTPS server, causing connection errors on port 8443.
 
 ### Step-by-Step SSL Setup:
 
