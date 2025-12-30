@@ -119,7 +119,7 @@ backend:
         comment: "Added bulkOrderProductTypes (List[str]) and bulkOrderBenefits (List[str]) fields to SiteSettings and SiteSettingsUpdate models in server.py"
       - working: true
         agent: "testing"
-        comment: "✅ BACKEND API TESTS PASSED: All 5 tests successful. GET /api/site-settings returns bulkOrderProductTypes (7 items) and bulkOrderBenefits (7 items) arrays. PUT /api/site-settings successfully updates both fields. Added test data: 'Spices' to product types and 'Free delivery above 50kg' to benefits. Changes persist correctly. API connectivity confirmed at https://dryfruto-shop.preview.emergentagent.com/api"
+        comment: "✅ BACKEND API TESTS PASSED: All 5 tests successful. GET /api/site-settings returns bulkOrderProductTypes (7 items) and bulkOrderBenefits (7 items) arrays. PUT /api/site-settings successfully updates both fields. Added test data: 'Spices' to product types and 'Free delivery above 50kg' to benefits. Changes persist correctly. API connectivity confirmed at https://dryfruthealth.preview.emergentagent.com/api"
 
 frontend:
   - task: "Theme Color Change - Update primary color to #C1E899"
