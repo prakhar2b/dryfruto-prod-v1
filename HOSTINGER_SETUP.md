@@ -6,11 +6,23 @@
 
 | Service | Container Name |
 |---------|----------------|
-| MongoDB | sm2024db01 |
-| Backend API | sm2024api01 |
-| Frontend | sm2024web01 |
-| Nginx Proxy | sm2024proxy01 |
-| Certbot SSL | sm2024ssl01 |
+| MongoDB | dryfruto_db |
+| Backend API | dryfruto_backend |
+| Frontend | dryfruto_frontend |
+| Nginx Proxy | dryfruto_proxy |
+| Certbot SSL | dryfruto_certbot |
+
+---
+
+## Port Configuration
+
+| Service | Internal Port | External Port |
+|---------|---------------|---------------|
+| MongoDB | 27017 | 27018 |
+| Backend | 8001 | 8002 |
+| Frontend | 3000 | 3001 |
+| Nginx HTTP | 80 | 8080 |
+| Nginx HTTPS | 443 | 8443 |
 
 ---
 
@@ -32,9 +44,9 @@ No manual seeding required! The backend auto-seeds on startup when the database 
 
 | Protocol | Port | URL |
 |----------|------|-----|
-| HTTP | 9001 | `http://statellmarketing.com:9001` |
-| HTTPS | 9443 | `https://statellmarketing.com:9443` |
-| Admin | 9001 | `http://statellmarketing.com:9001/admin` |
+| HTTP | 8080 | `http://statellmarketing.com:8080` |
+| HTTPS | 8443 | `https://statellmarketing.com:8443` |
+| Admin | 8080 | `http://statellmarketing.com:8080/admin` |
 
 ---
 
