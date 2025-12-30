@@ -558,7 +558,7 @@ async def delete_hero_slide(slide_id: str):
 # ----- Testimonial Routes -----
 @api_router.get("/testimonials", response_model=List[Testimonial])
 async def get_testimonials():
-    testimonials = await db.testimonials.find({}, {"_id": 0}).to_list(100)
+    testimonials = await ensure_collection_data("testimonials", get_default_testimonials)
     return testimonials
 
 @api_router.post("/testimonials", response_model=Testimonial)
