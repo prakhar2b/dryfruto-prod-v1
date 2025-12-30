@@ -385,15 +385,18 @@ const SettingsManager = () => {
         </div>
       </div>
 
-      <div className="flex justify-end">
-        <button
-          onClick={handleSave}
-          disabled={saving}
-          className="flex items-center gap-2 bg-[#f5f9f0]0 hover:bg-[#7CB342] text-white px-6 py-3 rounded-lg font-semibold transition-colors disabled:opacity-50"
-        >
-          <Save className="w-5 h-5" />
-          {saving ? 'Saving...' : 'Save Settings'}
-        </button>
+      {/* Sticky Save Button */}
+      <div className="sticky bottom-0 bg-white border-t border-gray-200 p-4 -mx-6 mt-6 shadow-lg">
+        <div className="flex justify-end">
+          <button
+            onClick={handleSave}
+            disabled={saving}
+            className="flex items-center gap-2 bg-[#7CB342] hover:bg-[#689F38] text-white px-8 py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 shadow-md"
+          >
+            <Save className="w-5 h-5" />
+            {saving ? 'Saving...' : 'Save Settings'}
+          </button>
+        </div>
       </div>
     </div>
   );
