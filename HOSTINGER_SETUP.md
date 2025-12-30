@@ -170,7 +170,7 @@ Internet
 │dryfruto│  │ dryfruto │  │ dryfruto  │
 │frontend│  │ backend  │  │ db        │
 │Frontend│  │ Backend  │  │ MongoDB   │
-│ :3000  │  │  :8001   │  │ :27017    │
+│ :3005  │  │  :8005   │  │ :27020    │
 │React   │  │ FastAPI  │  │           │
 └────────┘  └──────────┘  └───────────┘
                 │
