@@ -461,7 +461,7 @@ async def get_status_checks():
 # ----- Category Routes -----
 @api_router.get("/categories", response_model=List[Category])
 async def get_categories():
-    categories = await db.categories.find({}, {"_id": 0}).to_list(100)
+    categories = await ensure_collection_data("categories", get_default_categories)
     return categories
 
 @api_router.post("/categories", response_model=Category)
