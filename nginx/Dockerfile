@@ -58,14 +58,14 @@ http {
     gzip_types text/plain text/css application/json application/javascript text/xml application/xml text/javascript;
 
     upstream frontend {
-        server frontend:80;
+        server frontend:3005;
     }
 
     upstream backend {
-        server backend:8001;
+        server backend:8005;
     }
 
-    # HTTP Server (Port 80 mapped to 9001)
+    # HTTP Server (Port 80 mapped to 8080)
     server {
         listen 80;
         listen [::]:80;
@@ -104,7 +104,7 @@ http {
         }
     }
 
-    # HTTPS Server (Port 443 mapped to 9443)
+    # HTTPS Server (Port 443 mapped to 8443)
     server {
         listen 443 ssl http2;
         listen [::]:443 ssl http2;
