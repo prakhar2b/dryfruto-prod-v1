@@ -18,9 +18,9 @@
 
 | Service | Internal Port | External Port |
 |---------|---------------|---------------|
-| MongoDB | 27017 | (internal only) |
-| Backend | 8001 | (internal only) |
-| Frontend | 80 | (internal only) |
+| MongoDB | 27020 | (internal only) |
+| Backend | 8005 | (internal only) |
+| Frontend | 3005 | (internal only) |
 | Nginx HTTP | 80 | 8080 |
 | Nginx HTTPS | 443 | 8443 |
 
