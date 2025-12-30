@@ -71,23 +71,23 @@ const BulkOrder = () => {
       <Header />
       <main>
         {/* Hero Section */}
-        <div className="bg-emerald-600 text-white py-16">
+        <div className="bg-[#7CB342] text-white py-16">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Bulk Orders</h1>
-            <p className="text-lg text-emerald-200 max-w-2xl mx-auto">
+            <p className="text-lg text-[#e8f5e0] max-w-2xl mx-auto">
               Partner with us for your business needs. Get premium dry fruits at wholesale prices.
             </p>
           </div>
         </div>
 
-        <div className="bg-gradient-to-b from-emerald-50 to-white">
+        <div className="bg-gradient-to-b from-[#f5f9f0] to-white">
           <div className="max-w-7xl mx-auto px-4 py-12">
             {/* Benefits */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
               {benefits.map((benefit, index) => (
                 <div key={index} className="bg-white rounded-xl p-6 shadow-sm text-center">
-                  <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <benefit.icon className="w-6 h-6 text-emerald-600" />
+                  <div className="w-12 h-12 bg-[#e8f5e0] rounded-full flex items-center justify-center mx-auto mb-3">
+                    <benefit.icon className="w-6 h-6 text-[#8BC34A]" />
                   </div>
                   <h3 className="font-semibold text-gray-800 mb-1">{benefit.title}</h3>
                   <p className="text-sm text-gray-600">{benefit.desc}</p>
@@ -120,10 +120,10 @@ const BulkOrder = () => {
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Your Name *</label>
                         <input
-                          type="text"
-                          value={formData.name}
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+123|                          type="text"
+124|                          value={formData.name}
+125|                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#8BC34A] outline-none"
                           placeholder="John Doe"
                           required
                         />
@@ -134,7 +134,7 @@ const BulkOrder = () => {
                           type="text"
                           value={formData.company}
                           onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+                          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#8BC34A] outline-none"
                           placeholder="Your Company"
                         />
                       </div>
@@ -147,7 +147,7 @@ const BulkOrder = () => {
                           type="email"
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+                          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#8BC34A] outline-none"
                           placeholder="email@example.com"
                         />
                       </div>
@@ -157,7 +157,7 @@ const BulkOrder = () => {
                           type="tel"
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+                          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#8BC34A] outline-none"
                           placeholder="9876543210"
                           required
                         />
@@ -170,7 +170,7 @@ const BulkOrder = () => {
                         <select
                           value={formData.productType}
                           onChange={(e) => setFormData({ ...formData, productType: e.target.value })}
-                          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+                          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#8BC34A] outline-none"
                           required
                         >
                           <option value="">Select Product</option>
@@ -185,7 +185,7 @@ const BulkOrder = () => {
                           type="text"
                           value={formData.quantity}
                           onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
-                          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+                          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#8BC34A] outline-none"
                           placeholder="e.g., 50 kg"
                           required
                         />
@@ -197,7 +197,7 @@ const BulkOrder = () => {
                       <textarea
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#8BC34A] outline-none"
                         rows="3"
                         placeholder="Tell us about your specific requirements..."
                       />
@@ -208,7 +208,7 @@ const BulkOrder = () => {
                       <button
                         type="submit"
                         disabled={submitting}
-                        className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white py-3 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors disabled:opacity-50"
+                        className="flex-1 bg-[#8BC34A] hover:bg-[#7CB342] text-white py-3 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors disabled:opacity-50"
                       >
                         {submitting ? (
                           <>
@@ -245,7 +245,7 @@ const BulkOrder = () => {
 
               {/* Contact Info */}
               <div className="space-y-6">
-                <div className="bg-emerald-50 rounded-2xl p-8">
+                <div className="bg-[#f5f9f0] rounded-2xl p-8">
                   <h2 className="text-2xl font-bold text-gray-800 mb-4">Why Choose Us?</h2>
                   <ul className="space-y-3">
                     {(siteSettings.bulkOrderBenefits || [
@@ -257,19 +257,19 @@ const BulkOrder = () => {
                       'Quality testing certificates provided'
                     ]).map((item, index) => (
                       <li key={index} className="flex items-start gap-2">
-                        <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <CheckCircle className="w-5 h-5 text-[#8BC34A] mt-0.5 flex-shrink-0" />
                         <span className="text-gray-700">{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="bg-emerald-600 text-white rounded-2xl p-8">
+                <div className="bg-[#7CB342] text-white rounded-2xl p-8">
                   <h3 className="text-xl font-bold mb-4">Prefer to Talk?</h3>
-                  <p className="text-emerald-200 mb-6">Our bulk order team is ready to assist you with personalized quotes and solutions.</p>
+                  <p className="text-[#e8f5e0] mb-6">Our bulk order team is ready to assist you with personalized quotes and solutions.</p>
                   <a
                     href={callLink}
-                    className="flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white py-3 px-6 rounded-lg font-semibold transition-colors"
+                    className="flex items-center justify-center gap-2 bg-[#8BC34A] hover:bg-[#689F38] text-white py-3 px-6 rounded-lg font-semibold transition-colors"
                   >
                     <Phone className="w-5 h-5" />
                     Call: {siteSettings.phone}
