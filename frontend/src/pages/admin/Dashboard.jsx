@@ -42,9 +42,6 @@ const Dashboard = () => {
   };
 
   const seedData = async () => {
-    if (!window.confirm('This will reset all data to default values. Are you sure?')) {
-      return;
-    }
     try {
       setSeeding(true);
       const response = await axios.post(`${API}/seed-data`);
