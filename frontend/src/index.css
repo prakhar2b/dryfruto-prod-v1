@@ -16,13 +16,13 @@ code {
 
 /* Theme CSS Variables */
 :root {
-    /* Colors - Light Pastel Green Theme (#C1E899) */
-    --color-primary: #5a8f3e;
-    --color-primaryLight: #7ab356;
-    --color-accent: #5a8f3e;
-    --color-accentHover: #4a7a32;
-    --color-background: #f0f7e8;
-    --color-backgroundAlt: #e3f1d5;
+    /* Colors - Pastel Green Theme (#C1E899 as primary) */
+    --color-primary: #8BC34A;
+    --color-primaryLight: #C1E899;
+    --color-accent: #8BC34A;
+    --color-accentHover: #7CB342;
+    --color-background: #f5f9f0;
+    --color-backgroundAlt: #e8f5e0;
     --color-text: #1f2937;
     --color-textLight: #6b7280;
     --color-white: #ffffff;
@@ -38,23 +38,23 @@ code {
     --h3-size: 1.5rem;
     
     /* Header */
-    --header-bg: #5a8f3e;
+    --header-bg: #7CB342;
     --header-text: #ffffff;
     --header-nav-text: #ffffff;
     --header-nav-hover: #C1E899;
     
     /* Footer */
-    --footer-bg: #4a7a32;
-    --footer-text: #e3f1d5;
+    --footer-bg: #689F38;
+    --footer-text: #e8f5e0;
     --footer-link: #C1E899;
     
     /* Buttons */
-    --btn-primary-bg: #5a8f3e;
+    --btn-primary-bg: #8BC34A;
     --btn-primary-text: #ffffff;
-    --btn-primary-hover: #4a7a32;
-    --btn-secondary-bg: #4a7a32;
+    --btn-primary-hover: #7CB342;
+    --btn-secondary-bg: #689F38;
     --btn-secondary-text: #ffffff;
-    --btn-secondary-hover: #3d6629;
+    --btn-secondary-hover: #558B2F;
     --btn-radius: 0.5rem;
     
     /* Cards */
