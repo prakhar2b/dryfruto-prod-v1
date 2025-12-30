@@ -844,102 +844,194 @@ class BackendTester:
             self.log_test("GET /api/gift-boxes", False, f"Error: {str(e)}")
             return False
     
+    def test_seed_data_with_expected_counts(self) -> bool:
+        """Test POST /api/seed-data and verify expected counts"""
+        try:
+            response = self.session.post(f"{self.backend_url}/seed-data")
+            
+            if response.status_code != 200:
+                self.log_test("POST /api/seed-data (with counts)", False, f"Status code: {response.status_code}, Response: {response.text}")
+                return False
+            
+            data = response.json()
+            
+            # Check required fields
+            if "message" not in data:
+                self.log_test("POST /api/seed-data (with counts)", False, "Missing 'message' field in response")
+                return False
+            
+            # Expected counts from the review request
+            expected_counts = {
+                "categories": 6,
+                "products": 12,
+                "heroSlides": 3,
+                "testimonials": 6,
+                "giftBoxes": 6
+            }
+            
+            # Check if response contains expected counts
+            for field, expected_count in expected_counts.items():
+                if field in data:
+                    actual_count = data[field]
+                    if actual_count != expected_count:
+                        self.log_test("POST /api/seed-data (with counts)", False, 
+                                     f"Expected {field}: {expected_count}, got: {actual_count}")
+                        return False
+                else:
+                    # If field not in response, it might be an "already seeded" case
+                    # We'll verify counts via GET endpoints instead
+                    pass
+            
+            self.log_test("POST /api/seed-data (with counts)", True, 
+                         f"Seed data response: {data}")
+            return True
+            
+        except Exception as e:
+            self.log_test("POST /api/seed-data (with counts)", False, f"Error: {str(e)}")
+            return False
+    
+    def test_verify_seeded_data_counts(self) -> bool:
+        """Verify all data endpoints return expected counts after seeding"""
+        try:
+            # Expected counts from the review request
+            expected_counts = {
+                "categories": 6,
+                "products": 12,
+                "hero-slides": 3,
+                "testimonials": 6,
+                "gift-boxes": 6
+            }
+            
+            all_passed = True
+            results = {}
+            
+            for endpoint, expected_count in expected_counts.items():
+                try:
+                    response = self.session.get(f"{self.backend_url}/{endpoint}")
+                    
+                    if response.status_code != 200:
+                        self.log_test(f"Verify {endpoint} count", False, 
+                                     f"Status code: {response.status_code}")
+                        all_passed = False
+                        continue
+                    
+                    data = response.json()
+                    
+                    if not isinstance(data, list):
+                        self.log_test(f"Verify {endpoint} count", False, 
+                                     "Response is not a list")
+                        all_passed = False
+                        continue
+                    
+                    actual_count = len(data)
+                    results[endpoint] = actual_count
+                    
+                    if actual_count != expected_count:
+                        self.log_test(f"Verify {endpoint} count", False, 
+                                     f"Expected {expected_count}, got {actual_count}")
+                        all_passed = False
+                    else:
+                        self.log_test(f"Verify {endpoint} count", True, 
+                                     f"Correct count: {actual_count}")
+                
+                except Exception as e:
+                    self.log_test(f"Verify {endpoint} count", False, f"Error: {str(e)}")
+                    all_passed = False
+            
+            if all_passed:
+                self.log_test("Verify all seeded data counts", True, 
+                             f"All endpoints have correct counts: {results}")
+            else:
+                self.log_test("Verify all seeded data counts", False, 
+                             f"Some endpoints have incorrect counts: {results}")
+            
+            return all_passed
+            
+        except Exception as e:
+            self.log_test("Verify all seeded data counts", False, f"Error: {str(e)}")
+            return False
+    
+    def test_site_settings_after_seeding(self) -> bool:
+        """Test GET /api/site-settings returns proper settings after seeding"""
+        try:
+            response = self.session.get(f"{self.backend_url}/site-settings")
+            
+            if response.status_code != 200:
+                self.log_test("GET /api/site-settings (after seeding)", False, 
+                             f"Status code: {response.status_code}, Response: {response.text}")
+                return False
+            
+            data = response.json()
+            
+            # Check required fields exist
+            required_fields = ["businessName", "slogan", "phone", "email"]
+            missing_fields = []
+            
+            for field in required_fields:
+                if field not in data:
+                    missing_fields.append(field)
+            
+            if missing_fields:
+                self.log_test("GET /api/site-settings (after seeding)", False, 
+                             f"Missing required fields: {missing_fields}")
+                return False
+            
+            # Check expected default values
+            if data.get("businessName") != "DryFruto":
+                self.log_test("GET /api/site-settings (after seeding)", False, 
+                             f"Expected businessName 'DryFruto', got '{data.get('businessName')}'")
+                return False
+            
+            if data.get("slogan") != "Live With Health":
+                self.log_test("GET /api/site-settings (after seeding)", False, 
+                             f"Expected slogan 'Live With Health', got '{data.get('slogan')}'")
+                return False
+            
+            self.log_test("GET /api/site-settings (after seeding)", True, 
+                         f"Site settings correct: businessName='{data.get('businessName')}', slogan='{data.get('slogan')}'")
+            return True
+            
+        except Exception as e:
+            self.log_test("GET /api/site-settings (after seeding)", False, f"Error: {str(e)}")
+            return False
+
     def run_all_tests(self):
-        """Run all backend tests"""
-        print(f"🚀 Starting Backend API Tests for DryFruto")
+        """Run focused data seeding tests after docker-compose configuration changes"""
+        print(f"🚀 Testing Data Seeding Functionality After Docker-Compose Changes")
         print(f"Backend URL: {self.backend_url}")
-        print("=" * 60)
-        
-        # DEPLOYMENT FIXES TESTS (Priority Tests)
-        print("🔧 DEPLOYMENT FIXES TESTS")
-        print("=" * 60)
+        print("=" * 70)
         
         # Test 1: API Connectivity
+        print("🔧 BASIC CONNECTIVITY TEST")
+        print("=" * 70)
         if not self.test_api_connectivity():
             print("\n❌ API connectivity failed. Stopping tests.")
             return False
         
-        # Test 2: Health Check Endpoint (NEW)
+        # Test 2: Health Check Endpoint
+        print("\n🏥 HEALTH CHECK TEST")
+        print("=" * 70)
         self.test_health_check_endpoint()
         
-        # Test 3: Seed Data Endpoint (IMPROVED)
-        self.test_seed_data_endpoint()
+        # Test 3: Seed Data Endpoint with Expected Counts
+        print("\n🌱 SEED DATA FUNCTIONALITY TEST")
+        print("=" * 70)
+        self.test_seed_data_with_expected_counts()
         
-        print("\n" + "=" * 60)
-        print("📊 CORE API VERIFICATION TESTS")
-        print("=" * 60)
+        # Test 4: Verify Data After Seeding
+        print("\n📊 VERIFY SEEDED DATA COUNTS")
+        print("=" * 70)
+        self.test_verify_seeded_data_counts()
         
-        # Test 4: Core API - Categories
-        self.test_core_api_categories()
-        
-        # Test 5: Core API - Products
-        self.test_core_api_products()
-        
-        # Test 6: Core API - Site Settings
-        current_settings = self.test_get_site_settings()
-        if not current_settings:
-            print("\n❌ Failed to get site settings.")
-        
-        # Test 7: Core API - Hero Slides
-        self.test_core_api_hero_slides()
-        
-        # Test 8: Core API - Testimonials
-        self.test_core_api_testimonials()
-        
-        # Test 9: Core API - Gift Boxes
-        self.test_core_api_gift_boxes()
-        
-        print("\n" + "=" * 60)
-        print("⚙️ BULK ORDER SETTINGS TESTS")
-        print("=" * 60)
-        
-        # Test 10: Update product types
-        if current_settings:
-            if not self.test_update_site_settings_product_types(current_settings):
-                print("\n❌ Failed to update product types.")
-        
-        # Test 11: Update benefits
-        if current_settings:
-            if not self.test_update_site_settings_benefits(current_settings):
-                print("\n❌ Failed to update benefits.")
-        
-        # Test 12: Verify bulk order persistence
-        self.test_persistence_verification()
-        
-        print("\n" + "=" * 60)
-        print("🎨 THEME CUSTOMIZER TESTS")
-        print("=" * 60)
-        
-        # Test 13: Theme Export API
-        export_data = self.test_theme_export_api()
-        
-        # Test 14: Theme Import API
-        if export_data:
-            self.test_theme_import_api(export_data)
-        
-        # Test 15: Site Settings with Theme
-        self.test_site_settings_with_theme()
-        
-        # Test 16: Theme Persistence
-        self.test_theme_persistence_verification()
-        
-        print("\n" + "=" * 60)
-        print("🎨 CSS CUSTOMIZER TESTS")
-        print("=" * 60)
-        
-        # Test 17: CSS Customizer Save Page Styles
-        self.test_css_customizer_save_page_styles()
-        
-        # Test 18: CSS Customizer Get Page Styles
-        css_settings = self.test_css_customizer_get_page_styles()
-        
-        # Test 19: CSS Customizer Persistence
-        self.test_css_customizer_persistence()
+        # Test 5: Site Settings After Seeding
+        print("\n⚙️ SITE SETTINGS VERIFICATION")
+        print("=" * 70)
+        self.test_site_settings_after_seeding()
         
         # Summary
-        print("\n" + "=" * 60)
+        print("\n" + "=" * 70)
         print("📊 TEST SUMMARY")
-        print("=" * 60)
+        print("=" * 70)
         
         passed = sum(1 for result in self.test_results if result["success"])
         total = len(self.test_results)
@@ -950,7 +1042,7 @@ class BackendTester:
         print(f"\n🎯 Results: {passed}/{total} tests passed")
         
         if passed == total:
-            print("🎉 All tests passed!")
+            print("🎉 All data seeding tests passed!")
             return True
         else:
             print("⚠️  Some tests failed. Check details above.")
