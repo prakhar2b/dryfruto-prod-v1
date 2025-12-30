@@ -528,7 +528,7 @@ async def delete_product(product_id: str):
 # ----- Hero Slide Routes -----
 @api_router.get("/hero-slides", response_model=List[HeroSlide])
 async def get_hero_slides():
-    slides = await db.hero_slides.find({}, {"_id": 0}).to_list(100)
+    slides = await ensure_collection_data("hero_slides", get_default_hero_slides)
     return slides
 
 @api_router.post("/hero-slides", response_model=HeroSlide)
