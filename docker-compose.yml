@@ -6,8 +6,6 @@ services:
     restart: unless-stopped
     environment:
       MONGO_INITDB_DATABASE: dryfruto
-    ports:
-      - "27018:27017"
     volumes:
       - mongodb_data:/data/db
     networks:
@@ -29,8 +27,6 @@ services:
     environment:
       - MONGO_URL=mongodb://mongodb:27017
       - DB_NAME=dryfruto
-    ports:
-      - "8002:8001"
     volumes:
       - uploads_data:/app/uploads
     depends_on:
@@ -54,8 +50,6 @@ services:
         - REACT_APP_BACKEND_URL=http://statellmarketing.com:8080
     container_name: dryfruto_frontend
     restart: unless-stopped
-    ports:
-      - "3001:3000"
     depends_on:
       backend:
         condition: service_healthy
