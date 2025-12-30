@@ -16,13 +16,13 @@ code {
 
 /* Theme CSS Variables */
 :root {
-    /* Colors - Light Pastel Green Theme */
-    --color-primary: #059669;
-    --color-primaryLight: #10b981;
-    --color-accent: #10b981;
-    --color-accentHover: #059669;
-    --color-background: #ecfdf5;
-    --color-backgroundAlt: #d1fae5;
+    /* Colors - Light Pastel Green Theme (#C1E899) */
+    --color-primary: #5a8f3e;
+    --color-primaryLight: #7ab356;
+    --color-accent: #5a8f3e;
+    --color-accentHover: #4a7a32;
+    --color-background: #f0f7e8;
+    --color-backgroundAlt: #e3f1d5;
     --color-text: #1f2937;
     --color-textLight: #6b7280;
     --color-white: #ffffff;
@@ -38,28 +38,28 @@ code {
     --h3-size: 1.5rem;
     
     /* Header */
-    --header-bg: #059669;
+    --header-bg: #5a8f3e;
     --header-text: #ffffff;
     --header-nav-text: #ffffff;
-    --header-nav-hover: #d1fae5;
+    --header-nav-hover: #C1E899;
     
     /* Footer */
-    --footer-bg: #065f46;
-    --footer-text: #d1fae5;
-    --footer-link: #6ee7b7;
+    --footer-bg: #4a7a32;
+    --footer-text: #e3f1d5;
+    --footer-link: #C1E899;
     
     /* Buttons */
-    --btn-primary-bg: #10b981;
+    --btn-primary-bg: #5a8f3e;
     --btn-primary-text: #ffffff;
-    --btn-primary-hover: #059669;
-    --btn-secondary-bg: #065f46;
+    --btn-primary-hover: #4a7a32;
+    --btn-secondary-bg: #4a7a32;
     --btn-secondary-text: #ffffff;
-    --btn-secondary-hover: #047857;
+    --btn-secondary-hover: #3d6629;
     --btn-radius: 0.5rem;
     
     /* Cards */
     --card-bg: #ffffff;
-    --card-border: #d1fae5;
+    --card-border: #C1E899;
     --card-shadow: 0 1px 3px rgba(0,0,0,0.1);
     --card-radius: 1rem;
 }
