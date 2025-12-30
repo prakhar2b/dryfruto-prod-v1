@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Plus, Edit2, Trash2, Save, X, Search, Upload, Link } from 'lucide-react';
+import { Plus, Edit2, Trash2, Save, X, Search, Upload, Link, Download, FileText } from 'lucide-react';
 import axios from 'axios';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -61,6 +61,54 @@ const ProductsManager = () => {
     }
   };
 
+  // Download catalogue as CSV
+  const downloadCatalogue = (format = 'csv') => {
+    if (products.length === 0) {
+      alert('No products to export');
+      return;
+    }
+
+    const dataToExport = filteredProducts.length > 0 ? filteredProducts : products;
+
+    if (format === 'csv') {
+      const headers = ['SKU', 'Name', 'Category', 'Type', 'Base Price (₹)', 'Short Description'];
+      const csvContent = [
+        headers.join(','),
+        ...dataToExport.map(p => [
+          `"${p.sku || ''}"`,
+          `"${p.name || ''}"`,
+          `"${p.category || ''}"`,
+          `"${p.type || ''}"`,
+          p.basePrice || 0,
+          `"${(p.shortDescription || '').replace(/"/g, '""')}"`
+        ].join(','))
+      ].join('\n');
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `DryFruto_Catalogue_${new Date().toISOString().split('T')[0]}.csv`;
+      link.click();
+    } else if (format === 'json') {
+      const catalogueData = dataToExport.map(p => ({
+        sku: p.sku,
+        name: p.name,
+        category: p.category,
+        type: p.type,
+        basePrice: p.basePrice,
+        shortDescription: p.shortDescription,
+        description: p.description,
+        image: p.image
+      }));
+
+      const blob = new Blob([JSON.stringify(catalogueData, null, 2)], { type: 'application/json' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `DryFruto_Catalogue_${new Date().toISOString().split('T')[0]}.json`;
+      link.click();
+    }
+  };
+
   const filteredProducts = products.filter((product) => {
     const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          product.sku.toLowerCase().includes(searchQuery.toLowerCase());
@@ -75,13 +123,41 @@ const ProductsManager = () => {
           <h1 className="text-2xl font-bold text-gray-800">Products Manager</h1>
           <p className="text-gray-600">Manage product images, descriptions, and prices</p>
         </div>
-        <button
-          onClick={() => { setEditItem(null); setShowModal(true); }}
-          className="flex items-center gap-2 bg-[#7CB342] hover:bg-[#7CB342] text-white px-4 py-2 rounded-lg transition-colors"
-        >
-          <Plus className="w-5 h-5" />
-          Add Product
-        </button>
+        <div className="flex gap-3">
+          {/* Download Catalogue Dropdown */}
+          <div className="relative group">
+            <button
+              className="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition-colors"
+            >
+              <Download className="w-5 h-5" />
+              Download Catalogue
+            </button>
+            <div className="absolute right-0 mt-1 w-48 bg-white rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10">
+              <button
+                onClick={() => downloadCatalogue('csv')}
+                className="w-full flex items-center gap-2 px-4 py-3 text-left hover:bg-gray-50 text-gray-700 text-sm"
+              >
+                <FileText className="w-4 h-4" />
+                Download as CSV
+              </button>
+              <button
+                onClick={() => downloadCatalogue('json')}
+                className="w-full flex items-center gap-2 px-4 py-3 text-left hover:bg-gray-50 text-gray-700 text-sm border-t"
+              >
+                <FileText className="w-4 h-4" />
+                Download as JSON
+              </button>
+            </div>
+          </div>
+          
+          <button
+            onClick={() => { setEditItem(null); setShowModal(true); }}
+            className="flex items-center gap-2 bg-[#7CB342] hover:bg-[#689F38] text-white px-4 py-2 rounded-lg transition-colors"
+          >
+            <Plus className="w-5 h-5" />
+            Add Product
+          </button>
+        </div>
       </div>
 
       {/* Filters */}
@@ -94,13 +170,13 @@ const ProductsManager = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search products by name or SKU..."
-              className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#7CB342] outline-none"
+              className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#8BC34A] outline-none"
             />
           </div>
           <select
             value={filterCategory}
             onChange={(e) => setFilterCategory(e.target.value)}
-            className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#7CB342] outline-none"
+            className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#8BC34A] outline-none"
           >
             <option value="">All Categories</option>
             {categories.map((cat) => (
