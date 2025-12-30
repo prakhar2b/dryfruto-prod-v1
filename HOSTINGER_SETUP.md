@@ -18,11 +18,13 @@
 
 | Service | Internal Port | External Port |
 |---------|---------------|---------------|
-| MongoDB | 27017 | 27018 |
-| Backend | 8001 | 8002 |
-| Frontend | 3000 | 3001 |
+| MongoDB | 27017 | (internal only) |
+| Backend | 8001 | (internal only) |
+| Frontend | 80 | (internal only) |
 | Nginx HTTP | 80 | 8080 |
 | Nginx HTTPS | 443 | 8443 |
+
+**Note:** Only Nginx exposes external ports. All other services communicate internally via Docker network.
 
 ---
 
