@@ -590,6 +590,260 @@ class BackendTester:
             self.log_test("API Connectivity", False, f"Error: {str(e)}")
             return False
     
+    def test_health_check_endpoint(self) -> bool:
+        """Test GET /api/health endpoint (NEW deployment fix)"""
+        try:
+            response = self.session.get(f"{self.backend_url}/health")
+            
+            if response.status_code != 200:
+                self.log_test("GET /api/health", False, f"Status code: {response.status_code}, Response: {response.text}")
+                return False
+            
+            data = response.json()
+            
+            # Check required fields
+            if "status" not in data:
+                self.log_test("GET /api/health", False, "Missing 'status' field in response")
+                return False
+            
+            if "database" not in data:
+                self.log_test("GET /api/health", False, "Missing 'database' field in response")
+                return False
+            
+            # Check expected values
+            if data["status"] != "healthy":
+                self.log_test("GET /api/health", False, f"Expected status 'healthy', got '{data['status']}'")
+                return False
+            
+            if data["database"] != "connected":
+                self.log_test("GET /api/health", False, f"Expected database 'connected', got '{data['database']}'")
+                return False
+            
+            self.log_test("GET /api/health", True, f"Health check passed: {data}")
+            return True
+            
+        except requests.exceptions.RequestException as e:
+            self.log_test("GET /api/health", False, f"Request error: {str(e)}")
+            return False
+        except json.JSONDecodeError as e:
+            self.log_test("GET /api/health", False, f"JSON decode error: {str(e)}")
+            return False
+        except Exception as e:
+            self.log_test("GET /api/health", False, f"Unexpected error: {str(e)}")
+            return False
+    
+    def test_seed_data_endpoint(self) -> bool:
+        """Test POST /api/seed-data endpoint (IMPROVED deployment fix)"""
+        try:
+            response = self.session.post(f"{self.backend_url}/seed-data")
+            
+            if response.status_code != 200:
+                self.log_test("POST /api/seed-data", False, f"Status code: {response.status_code}, Response: {response.text}")
+                return False
+            
+            data = response.json()
+            
+            # Check required fields
+            if "message" not in data:
+                self.log_test("POST /api/seed-data", False, "Missing 'message' field in response")
+                return False
+            
+            # Check for either "already seeded" or "seeded successfully" message
+            message = data["message"]
+            if "already seeded" in message.lower():
+                # Data already exists case
+                if "products" not in data:
+                    self.log_test("POST /api/seed-data", False, "Missing 'products' count in already seeded response")
+                    return False
+                
+                products_count = data["products"]
+                if not isinstance(products_count, int) or products_count <= 0:
+                    self.log_test("POST /api/seed-data", False, f"Invalid products count: {products_count}")
+                    return False
+                
+                self.log_test("POST /api/seed-data", True, f"Data already seeded with {products_count} products")
+                return True
+                
+            elif "seeded successfully" in message.lower():
+                # Fresh seeding case
+                if "products" not in data:
+                    self.log_test("POST /api/seed-data", False, "Missing 'products' count in seeded response")
+                    return False
+                
+                self.log_test("POST /api/seed-data", True, f"Data seeded successfully: {data}")
+                return True
+            else:
+                self.log_test("POST /api/seed-data", False, f"Unexpected message: {message}")
+                return False
+            
+        except requests.exceptions.RequestException as e:
+            self.log_test("POST /api/seed-data", False, f"Request error: {str(e)}")
+            return False
+        except json.JSONDecodeError as e:
+            self.log_test("POST /api/seed-data", False, f"JSON decode error: {str(e)}")
+            return False
+        except Exception as e:
+            self.log_test("POST /api/seed-data", False, f"Unexpected error: {str(e)}")
+            return False
+    
+    def test_core_api_categories(self) -> bool:
+        """Test GET /api/categories - should return 6 categories"""
+        try:
+            response = self.session.get(f"{self.backend_url}/categories")
+            
+            if response.status_code != 200:
+                self.log_test("GET /api/categories", False, f"Status code: {response.status_code}, Response: {response.text}")
+                return False
+            
+            data = response.json()
+            
+            if not isinstance(data, list):
+                self.log_test("GET /api/categories", False, "Response is not a list")
+                return False
+            
+            if len(data) != 6:
+                self.log_test("GET /api/categories", False, f"Expected 6 categories, got {len(data)}")
+                return False
+            
+            # Check if each category has required fields
+            for i, category in enumerate(data):
+                required_fields = ["id", "name", "slug", "image", "icon"]
+                for field in required_fields:
+                    if field not in category:
+                        self.log_test("GET /api/categories", False, f"Category {i} missing field: {field}")
+                        return False
+            
+            self.log_test("GET /api/categories", True, f"Successfully retrieved {len(data)} categories")
+            return True
+            
+        except Exception as e:
+            self.log_test("GET /api/categories", False, f"Error: {str(e)}")
+            return False
+    
+    def test_core_api_products(self) -> bool:
+        """Test GET /api/products - should return 12 products"""
+        try:
+            response = self.session.get(f"{self.backend_url}/products")
+            
+            if response.status_code != 200:
+                self.log_test("GET /api/products", False, f"Status code: {response.status_code}, Response: {response.text}")
+                return False
+            
+            data = response.json()
+            
+            if not isinstance(data, list):
+                self.log_test("GET /api/products", False, "Response is not a list")
+                return False
+            
+            if len(data) != 12:
+                self.log_test("GET /api/products", False, f"Expected 12 products, got {len(data)}")
+                return False
+            
+            # Check if each product has required fields
+            for i, product in enumerate(data):
+                required_fields = ["id", "name", "slug", "category", "basePrice", "image"]
+                for field in required_fields:
+                    if field not in product:
+                        self.log_test("GET /api/products", False, f"Product {i} missing field: {field}")
+                        return False
+            
+            self.log_test("GET /api/products", True, f"Successfully retrieved {len(data)} products")
+            return True
+            
+        except Exception as e:
+            self.log_test("GET /api/products", False, f"Error: {str(e)}")
+            return False
+    
+    def test_core_api_hero_slides(self) -> bool:
+        """Test GET /api/hero-slides - should return hero slides"""
+        try:
+            response = self.session.get(f"{self.backend_url}/hero-slides")
+            
+            if response.status_code != 200:
+                self.log_test("GET /api/hero-slides", False, f"Status code: {response.status_code}, Response: {response.text}")
+                return False
+            
+            data = response.json()
+            
+            if not isinstance(data, list):
+                self.log_test("GET /api/hero-slides", False, "Response is not a list")
+                return False
+            
+            # Check if each slide has required fields
+            for i, slide in enumerate(data):
+                required_fields = ["id", "title", "subtitle", "description", "image", "cta"]
+                for field in required_fields:
+                    if field not in slide:
+                        self.log_test("GET /api/hero-slides", False, f"Hero slide {i} missing field: {field}")
+                        return False
+            
+            self.log_test("GET /api/hero-slides", True, f"Successfully retrieved {len(data)} hero slides")
+            return True
+            
+        except Exception as e:
+            self.log_test("GET /api/hero-slides", False, f"Error: {str(e)}")
+            return False
+    
+    def test_core_api_testimonials(self) -> bool:
+        """Test GET /api/testimonials - should return testimonials"""
+        try:
+            response = self.session.get(f"{self.backend_url}/testimonials")
+            
+            if response.status_code != 200:
+                self.log_test("GET /api/testimonials", False, f"Status code: {response.status_code}, Response: {response.text}")
+                return False
+            
+            data = response.json()
+            
+            if not isinstance(data, list):
+                self.log_test("GET /api/testimonials", False, "Response is not a list")
+                return False
+            
+            # Check if each testimonial has required fields
+            for i, testimonial in enumerate(data):
+                required_fields = ["id", "name", "review", "avatar"]
+                for field in required_fields:
+                    if field not in testimonial:
+                        self.log_test("GET /api/testimonials", False, f"Testimonial {i} missing field: {field}")
+                        return False
+            
+            self.log_test("GET /api/testimonials", True, f"Successfully retrieved {len(data)} testimonials")
+            return True
+            
+        except Exception as e:
+            self.log_test("GET /api/testimonials", False, f"Error: {str(e)}")
+            return False
+    
+    def test_core_api_gift_boxes(self) -> bool:
+        """Test GET /api/gift-boxes - should return gift boxes"""
+        try:
+            response = self.session.get(f"{self.backend_url}/gift-boxes")
+            
+            if response.status_code != 200:
+                self.log_test("GET /api/gift-boxes", False, f"Status code: {response.status_code}, Response: {response.text}")
+                return False
+            
+            data = response.json()
+            
+            if not isinstance(data, list):
+                self.log_test("GET /api/gift-boxes", False, "Response is not a list")
+                return False
+            
+            # Check if each gift box has required fields
+            for i, gift_box in enumerate(data):
+                required_fields = ["id", "name", "image", "price"]
+                for field in required_fields:
+                    if field not in gift_box:
+                        self.log_test("GET /api/gift-boxes", False, f"Gift box {i} missing field: {field}")
+                        return False
+            
+            self.log_test("GET /api/gift-boxes", True, f"Successfully retrieved {len(data)} gift boxes")
+            return True
+            
+        except Exception as e:
+            self.log_test("GET /api/gift-boxes", False, f"Error: {str(e)}")
+            return False
+    
     def run_all_tests(self):
         """Run all backend tests"""
         print(f"🚀 Starting Backend API Tests for DryFruto")
